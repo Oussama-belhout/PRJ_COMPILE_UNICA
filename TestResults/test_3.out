@@ -1,0 +1,5 @@
+LEXER: Matched token EXTERN: 'extern'
+LEXER: Matched token INT: 'int'
+LEXER: Matched token IDENTIFICATEUR: 'printd'
+LEXER: Matched token LPAREN: '('
+syntax error a la ligne 1 colonne 17
