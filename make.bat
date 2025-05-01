@@ -73,11 +73,11 @@ if %errorlevel% neq 0 (
     echo Test failed for !testFile!. Exiting...
     exit /b
 ) else (
-    echo Test passed for !testFile!.
-    echo Output:
+    echo Test passed for !testFile!.********************
+    echo Output: ***************************************
     type .\TestResults\test_%index%.out
-    echo ----------------------------------------------------
+    echo ***********************************************
 )
 
 echo Test completed for !testFile!.
-pause
+

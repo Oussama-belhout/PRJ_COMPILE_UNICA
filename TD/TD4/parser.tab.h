@@ -39,70 +39,14 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     IDENTIFICATEUR = 258,
-     CONSTANTE = 259,
-     VOID = 260,
-     INT = 261,
-     FOR = 262,
-     WHILE = 263,
-     IF = 264,
-     ELSE = 265,
-     SWITCH = 266,
-     CASE = 267,
-     DEFAULT = 268,
-     BREAK = 269,
-     RETURN = 270,
-     PLUS = 271,
-     MOINS = 272,
-     MUL = 273,
-     DIV = 274,
-     LSHIFT = 275,
-     RSHIFT = 276,
-     BAND = 277,
-     BOR = 278,
-     LAND = 279,
-     LOR = 280,
-     LT = 281,
-     GT = 282,
-     GEQ = 283,
-     LEQ = 284,
-     EQ = 285,
-     NEQ = 286,
-     NOT = 287,
-     EXTERN = 288,
-     LBRACE = 289,
-     RBRACE = 290,
-     LPAREN = 291,
-     RPAREN = 292,
-     COMMA = 293,
-     LBRACKET = 294,
-     RBRACKET = 295,
-     SEMICOLON = 296,
-     COLON = 297,
-     THEN = 298,
-     OP = 299,
-     REL = 300
+     NB = 258
    };
 #endif
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-{
-
-/* Line 1676 of yacc.c  */
-#line 25 "miniC.y"
-
-    int integer;
-	float real;
-    char *string;
-
-
-
-/* Line 1676 of yacc.c  */
-#line 105 "miniC.tab.h"
-} YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
