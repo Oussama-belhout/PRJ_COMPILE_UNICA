@@ -20,7 +20,7 @@ rem Check if the user provided an index as an argument
 
     rem --- Step 3: Compile the lexer, parser, and libraries ---
     echo Compiling with GCC...
-    gcc -o compiler lex.yy.c miniC.tab.c -lfl
+    gcc -o compiler lex.yy.c miniC.tab.c ast.c symtab.c -lfl -lm 
     if %errorlevel% neq 0 (
         echo Compilation failed. Exiting...
         exit /b
@@ -68,15 +68,17 @@ echo ----------------------------------------------------
 rem Run the test and save output to the console and the .out file
 compiler.exe < !testFile! > .\TestResults\test_%index%.out 2>&1
 
-rem Print the compilation results to the console
+rem Print the output directly to the console
+echo Output: ***************************************
+compiler.exe < !testFile!
+echo ***********************************************
+
+rem Check the compilation result
 if %errorlevel% neq 0 (
     echo Test failed for !testFile!. Exiting...
     exit /b
 ) else (
-    echo Test passed for !testFile!.********************
-    echo Output: ***************************************
-    type .\TestResults\test_%index%.out
-    echo ***********************************************
+    echo Test passed for !testFile!.
 )
 
 echo Test completed for !testFile!.

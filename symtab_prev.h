@@ -1,6 +1,6 @@
 #ifndef SYMTAB_H
 #define SYMTAB_H
-#include "ast.h"
+
 #define TABLE_SIZE 211  // A prime number for better hashing
 
 typedef struct Symbol {
@@ -25,9 +25,13 @@ typedef struct ScopeEntry {
 // One scope level = linked list of declared identifiers
 typedef struct ScopeStack {
     ScopeEntry *ids;
-    struct InstructEntry *instructs;
     struct ScopeStack *next;
 } ScopeStack;
+
+typedef struct InstructEntry {
+    char *name;
+    struct ScopeEntry *next;
+} ScopeEntry;
 
 
 void symtab_init();
@@ -37,10 +41,10 @@ void exit_scope();
 void insert_symbol(const char *name, const char *type);
 void inject_type_symbol(const char *name, const char *new_type);
 Symbol *lookup_symbol(const char *name);
-InstructEntry *get_bloc_instructs();
 void print_table_symbol();
 int get_current_scope();
 void print_symbol_table();
+
 
 
 #endif

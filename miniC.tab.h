@@ -92,16 +92,24 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 25 "miniC.y"
+#line 15 "miniC.y"
+
+	struct ast_container {
+		struct AST *ast;
+		int someting ;
+	}ast_container;
 
     int integer;
-	float real;
-    char *string;
+    char *str;
+    struct AST *ast;
+    struct AST **ast_list;
+	struct ast_container ast_contain;
+	struct InstructEntry *InstructEntry;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 105 "miniC.tab.h"
+#line 113 "miniC.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

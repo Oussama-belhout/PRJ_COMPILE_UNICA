@@ -758,87 +758,87 @@ YY_RULE_SETUP
 case 15:
 YY_RULE_SETUP
 #line 41 "ANSI-C.l"
-{ col += yyleng;  return PLUS; }
+{ yylval.str = strdup(yytext); col += yyleng; return PLUS; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 42 "ANSI-C.l"
-{ col += yyleng;  return MOINS; }
+{ yylval.str = strdup(yytext); col += yyleng; return MOINS; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 43 "ANSI-C.l"
-{ col += yyleng;  return MUL; }
+{ yylval.str = strdup(yytext); col += yyleng; return MUL; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 44 "ANSI-C.l"
-{ col += yyleng;  return DIV; }
+{ yylval.str = strdup(yytext); col += yyleng; return DIV; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 45 "ANSI-C.l"
-{ col += yyleng;  return BAND; }
+{ yylval.str = strdup(yytext); col += yyleng; return BAND; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 46 "ANSI-C.l"
-{ col += yyleng;  return BOR; }
+{ yylval.str = strdup(yytext); col += yyleng; return BOR; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 47 "ANSI-C.l"
-{ col += yyleng;  return LAND; }
+{ yylval.str = strdup(yytext); col += yyleng; return LAND; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 48 "ANSI-C.l"
-{ col += yyleng;  return LOR; }
+{ yylval.str = strdup(yytext); col += yyleng; return LOR; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 49 "ANSI-C.l"
-{ col += yyleng;  return LT; }
+{ yylval.str = strdup(yytext); col += yyleng; return LT; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 50 "ANSI-C.l"
-{ col += yyleng;  return GT; }
+{ yylval.str = strdup(yytext); col += yyleng; return GT; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 51 "ANSI-C.l"
-{ col += yyleng;  return GEQ; }
+{ yylval.str = strdup(yytext); col += yyleng; return GEQ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 52 "ANSI-C.l"
-{ col += yyleng;  return LEQ; }
+{ yylval.str = strdup(yytext); col += yyleng; return LEQ; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 53 "ANSI-C.l"
-{ col += yyleng;  return EQ; }
+{ yylval.str = strdup(yytext); col += yyleng; return EQ; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 54 "ANSI-C.l"
-{ col += yyleng;  return NEQ; }
+{ yylval.str = strdup(yytext); col += yyleng; return NEQ; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 55 "ANSI-C.l"
-{ col += yyleng;  return NOT; }
+{ yylval.str = strdup(yytext); col += yyleng; return NOT; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 56 "ANSI-C.l"
-{ col += yyleng;  return LSHIFT; }
+{ yylval.str = strdup(yytext); col += yyleng; return LSHIFT; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 57 "ANSI-C.l"
-{ col += yyleng;  return RSHIFT; }
+{ yylval.str = strdup(yytext); col += yyleng; return RSHIFT; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
@@ -893,12 +893,12 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 69 "ANSI-C.l"
-{ yylval.integer = atoi(yytext); col += yyleng;  return CONSTANTE; }
+{ yylval.integer = atoi(yytext);col += yyleng;  return CONSTANTE; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 71 "ANSI-C.l"
-{ yylval.string = strdup(yytext); col += yyleng;  return IDENTIFICATEUR; }
+{ yylval.str = strdup(yytext); col += yyleng;  return IDENTIFICATEUR; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP

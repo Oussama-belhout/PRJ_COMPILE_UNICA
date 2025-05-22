@@ -2,8 +2,7 @@ extern int printd( int i );
 
 int main() {
   int i,j;
-  i = 45000;
-  j = -123;
+  i = j / 3; 
   printd(i+j);
   printd(45000+j);
   printd(i+123);

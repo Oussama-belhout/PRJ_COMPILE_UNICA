@@ -1,0 +1,109 @@
+entering now scope-----
+just got the id x 
+we got to const : 13047400 
+just got the aff 	
+(x = 13047400)
+-- reducing instruction list one-by-one
+(x = 13047400)
+reducing now bloc
+Created AST_BLOCK with instructs: 00C716C0
+this bloc has 1 instructions`- Block -- 0
+   `- Assign
+      |- Id: x
+      `- Number: 13047400
+exiting now scope 1
+exiting now scope 2
+just got the id w 
+we got to const : 13047544 
+just got the aff 	
+(w = 13047544)
+-- reducing instruction list one-by-one
+(w = 13047544)
+reducing now bloc
+Created AST_BLOCK with instructs: 00C71750
+this bloc has 2 instructions`- Block -- 0
+   `- Assign
+      |- Id: w
+      `- Number: 13047544
+exiting now scope 1
+exiting now scope 2
+just got the id z 
+we got to const : 13042864 
+just got the aff 	
+(z = 13042864)
+-- reducing instruction list one-by-one
+(z = 13042864)
+reducing now bloc
+Created AST_BLOCK with instructs: 00C7A950
+this bloc has 3 instructions`- Block -- 0
+   `- Assign
+      |- Id: z
+      `- Number: 13042864
+exiting now scope 1
+exiting now scope 2
+just got the id y 
+we got to const : 13085056 
+just got the aff 	
+(y = 13085056)
+-- reducing instruction list one-by-one
+(y = 13085056)
+reducing now bloc
+Created AST_BLOCK with instructs: 00C7AA10
+this bloc has 4 instructions`- Block -- 0
+   `- Assign
+      |- Id: y
+      `- Number: 13085056
+exiting now scope 1
+exiting now scope 2
+just got the id u 
+we got to const : 13084992 
+just got the aff 	
+(u = 13084992)
+-- reducing instruction list one-by-one
+(u = 13084992)
+-- reducing instruction list one-by-one
+{
+  (y = 13085056)
+
+}
+-- reducing instruction list one-by-one
+{
+  (z = 13042864)
+
+}
+-- reducing instruction list one-by-one
+{
+  (w = 13047544)
+
+}
+-- reducing instruction list one-by-one
+{
+  (x = 13047400)
+
+}
+reducing now bloc
+Created AST_BLOCK with instructs: 00C7AAF0
+this bloc has 9 instructions`- Block -- 0
+   |- Block -- 0
+   |  `- Assign
+   |     |- Id: x
+   |     `- Number: 13047400
+   |- Block -- 0
+   |  `- Assign
+   |     |- Id: w
+   |     `- Number: 13047544
+   |- Block -- 0
+   |  `- Assign
+   |     |- Id: z
+   |     `- Number: 13042864
+   |- Block -- 0
+   |  `- Assign
+   |     |- Id: y
+   |     `- Number: 13085056
+   `- Assign
+      |- Id: u
+      `- Number: 13084992
+exiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+now printing the whole tree 

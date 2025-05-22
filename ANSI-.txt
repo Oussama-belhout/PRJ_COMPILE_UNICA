@@ -38,23 +38,23 @@ IS                      (u|U|l|L)*
 "while"                 { col += yyleng;  return WHILE; }
 "break"                 { col += yyleng;  return BREAK; }
 
-"+"                     { yylval.str = strdup(yytext); col += yyleng; return PLUS; }
-"-"                     { yylval.str = strdup(yytext); col += yyleng; return MOINS; }
-"*"                     { yylval.str = strdup(yytext); col += yyleng; return MUL; }
-"/"                     { yylval.str = strdup(yytext); col += yyleng; return DIV; }
-"&"                     { yylval.str = strdup(yytext); col += yyleng; return BAND; }
-"|"                     { yylval.str = strdup(yytext); col += yyleng; return BOR; }
-"&&"                    { yylval.str = strdup(yytext); col += yyleng; return LAND; }
-"||"                    { yylval.str = strdup(yytext); col += yyleng; return LOR; }
-"<"                     { yylval.str = strdup(yytext); col += yyleng; return LT; }
-">"                     { yylval.str = strdup(yytext); col += yyleng; return GT; }
-">="                    { yylval.str = strdup(yytext); col += yyleng; return GEQ; }
-"<="                    { yylval.str = strdup(yytext); col += yyleng; return LEQ; }
-"=="                    { yylval.str = strdup(yytext); col += yyleng; return EQ; }
-"!="                    { yylval.str = strdup(yytext); col += yyleng; return NEQ; }
-"!"                     { yylval.str = strdup(yytext); col += yyleng; return NOT; }
-"<<"                     { yylval.str = strdup(yytext); col += yyleng; return LSHIFT; }
-">>"                     { yylval.str = strdup(yytext); col += yyleng; return RSHIFT; }
+"+"                     { col += yyleng;  return PLUS; }
+"-"                     { col += yyleng;  return MOINS; }
+"*"                     { col += yyleng;  return MUL; }
+"/"                     { col += yyleng;  return DIV; }
+"&"                     { col += yyleng;  return BAND; }
+"|"                     { col += yyleng;  return BOR; }
+"&&"                    { col += yyleng;  return LAND; }
+"||"                    { col += yyleng;  return LOR; }
+"<"                     { col += yyleng;  return LT; }
+">"                     { col += yyleng;  return GT; }
+">="                    { col += yyleng;  return GEQ; }
+"<="                    { col += yyleng;  return LEQ; }
+"=="                    { col += yyleng;  return EQ; }
+"!="                    { col += yyleng;  return NEQ; }
+"!"                     { col += yyleng;  return NOT; }
+"<<"                     { col += yyleng;  return LSHIFT; }
+">>"                     { col += yyleng;  return RSHIFT; }
 "="                     { col += yyleng;  return OP; }
 ";"                     { col += yyleng;  return SEMICOLON; }
 ":"                     { col += yyleng;  return COLON; }
@@ -66,9 +66,9 @@ IS                      (u|U|l|L)*
 "["                     { col += yyleng;  return LBRACKET; }
 "]"                     { col += yyleng;  return RBRACKET; }
 
-{D}+                    { yylval.integer = atoi(yytext);col += yyleng;  return CONSTANTE; }
+{D}+                    { yylval.integer = atoi(yytext); col += yyleng;  return CONSTANTE; }
 
-{L}({L}|{D})*           { yylval.str = strdup(yytext); col += yyleng;  return IDENTIFICATEUR; }
+{L}({L}|{D})*           { yylval.id = strdup(yytext); col += yyleng;  return IDENTIFICATEUR; }
 
 
 L?\"(\\.|[^\\"])*\"     { /* A completer */ }

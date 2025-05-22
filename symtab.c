@@ -15,11 +15,16 @@ unsigned int hash(const char *str) {
     return hash % TABLE_SIZE;
 }
 
+InstructEntry *get_bloc_instructs(){
+    return scope_stack->instructs;
+}
+
 void symtab_init() {
     memset(table, 0, sizeof(table));
     scope_stack = NULL;
-    current_scope = 0;
+
 }
+
 int check_declaration(const char *name) {
     Symbol *sym = lookup_symbol(name);
     return sym && sym->scope_level == current_scope;
@@ -61,15 +66,25 @@ void symtab_free() {
 
 void enter_scope() {
     ScopeStack *new_scope = malloc(sizeof(ScopeStack));
+    InstructEntry *curr_bloc_instructs = malloc(sizeof(InstructEntry));
+    curr_bloc_instructs->instruct = NULL ;
+    curr_bloc_instructs->next = NULL ;
+
+
     new_scope->ids = NULL;
     new_scope->next = scope_stack;
+    //->instructs->instruct->data.AST_BLOCK.counter = current_scope;
+
+    new_scope->instructs = curr_bloc_instructs ;
     scope_stack = new_scope;
+
     current_scope++;
 }
 
 void exit_scope() {
+    printf("exiting now scope 1\n");
     if (!scope_stack) return;
-
+    printf("exiting now scope 2\n");
     ScopeEntry *id = scope_stack->ids;
     while (id) {
         unsigned int idx = hash(id->name);
@@ -77,7 +92,7 @@ void exit_scope() {
         while (entry && strcmp(entry->name, id->name) != 0)
             entry = entry->next;
 
-        if (entry && entry->stack) {
+        if (entry && entry) {
             Symbol *top = entry->stack;
             entry->stack = top->next;
             free(top->name);
@@ -93,8 +108,11 @@ void exit_scope() {
 
     ScopeStack *old_scope = scope_stack;
     scope_stack = scope_stack->next;
+    //ast_new_block(old_scope->instructs);
     free(old_scope);
     current_scope--;
+    
+    
 }
 
 void insert_symbol(const char *name, const char *type) {

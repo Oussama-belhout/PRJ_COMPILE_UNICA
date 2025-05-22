@@ -1,15 +1,21 @@
 extern int printd( int i );
 
-/*----------------------------*/
-/* un petit programme exemple
-  pour montrer le langage miniC.*/
-/*----------------------------*/
-
 int main() {
-   int i, x;
-   for (i=0; i<10; i=i+1) {
-	if (i==5) break;
+   int i,j;
+   w = 6+3 ;
+   i = 8+j ;
+   {
+      i = 8+j ;
+      u = 8+j  ;
+      {
+         j = 88+j ;
+         j = 2;
+         {
+            gg = 898+j ;
+         }
+         j = 8 ;
+      }
+      i = 8;
    }
-   printd(i);
-   return (i+3);
+   u = 8;
 }

@@ -18,9 +18,8 @@ unsigned int hash(const char *str) {
 void symtab_init() {
     memset(table, 0, sizeof(table));
     scope_stack = NULL;
-
+    current_scope = 0;
 }
-
 int check_declaration(const char *name) {
     Symbol *sym = lookup_symbol(name);
     return sym && sym->scope_level == current_scope;
@@ -62,18 +61,13 @@ void symtab_free() {
 
 void enter_scope() {
     ScopeStack *new_scope = malloc(sizeof(ScopeStack));
-    InstructEntry *curr_bloc = malloc(sizeof(InstructEntry));
-    curr_bloc->instruct = NULL ;
-    curr_bloc->next = NULL ;
-
     new_scope->ids = NULL;
     new_scope->next = scope_stack;
     scope_stack = new_scope;
-
     current_scope++;
 }
 
-void exit_scope(InstructEntry *prev_bloc) {
+void exit_scope() {
     if (!scope_stack) return;
 
     ScopeEntry *id = scope_stack->ids;
@@ -101,8 +95,6 @@ void exit_scope(InstructEntry *prev_bloc) {
     scope_stack = scope_stack->next;
     free(old_scope);
     current_scope--;
-    curr_bloc = prev_bloc ;
-    
 }
 
 void insert_symbol(const char *name, const char *type) {

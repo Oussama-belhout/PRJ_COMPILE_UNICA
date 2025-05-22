@@ -1,0 +1,83 @@
+entering now scope-----
+just got the id i 
+just got the id j 
+we got to const : 7083608 
+reducing the bin op (7083608) propagated to experession
+just got the aff 	
+(i = (j / 7083608)
+)
+just got the id i 
+just got the id j 
+reducing the bin op (7083752) propagated to experession
+we got to const : 7083880 
+just got the id j 
+reducing the bin op (7083920) propagated to experession
+just got the id i 
+we got to const : 7121368 
+reducing the bin op (7121368) propagated to experession
+we got to const : 7121528 
+we got to const : 7121416 
+reducing the bin op (7121416) propagated to experession
+just got the id i 
+just got the id j 
+we got to const : 7121384 
+reducing the bin op (7121384) propagated to experession
+reducing the bin op (7121320) propagated to experession
+just got the id i 
+we got to const : 7121544 
+reducing the bin op (7121544) propagated to experession
+just got the id j 
+reducing the bin op (7121448) propagated to experession
+just got the id i 
+we got to const : 7121560 
+reducing the bin op (7121560) propagated to experession
+just got the id j 
+we got to const : 7121592 
+reducing the bin op (7121592) propagated to experession
+reducing the bin op (7121576) propagated to experession
+just got the id i 
+we got to const : 7121224 
+reducing the bin op (7121224) propagated to experession
+we got to const : 7121624 
+reducing the bin op (7121624) propagated to experession
+we got to const : 7121192 
+just got the id j 
+we got to const : 7121288 
+reducing the bin op (7121288) propagated to experession
+reducing the bin op (7121208) propagated to experession
+we got to const : 7121288 
+-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+Unknown-- reducing instruction list one-by-one
+(i = (j / 7083608)
+)
+reducing now bloc
+Created AST_BLOCK with instructs: 006CB5A8
+this bloc has 11 instructions`- Block -- 0
+   |- Assign
+   |  |- Id: i
+   |  `- BinOp [/]
+   |     |- Id: j
+   |     `- Number: 7083608
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   |- Unknown
+   `- Unknown
+exiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+now printing the whole tree 
