@@ -79,6 +79,7 @@ if %errorlevel% neq 0 (
     exit /b
 ) else (
     echo Test passed for !testFile!.
+    dot -Tpdf Graph.dot -o Graph.pdf
 )
 
 echo Test completed for !testFile!.

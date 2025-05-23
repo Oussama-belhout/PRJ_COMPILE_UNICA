@@ -13,6 +13,7 @@
 	AST *ops[3]; 
 	int ops_counter = 0;
 	int param_counter = 0;
+
 %}
 
 
@@ -63,7 +64,7 @@
 %start programme
 
 
-
+			
 //TODO 
 // - review asendant grammar and their construction (with their grammar)
 // - refactor grammar
@@ -112,7 +113,7 @@ declarateur:
 fonction:
 	type IDENTIFICATEUR LPAREN liste_parms RPAREN {enter_scope();printf("entering now scope-----\n"); } bloc {exit_scope();printf("reduced-exited function-scope main ---------\n");} // here we call 
 	{
-		FILE *dotfile = fopen("Graph.dot", "w");
+		FILE *dotfile = fopen("Graph.dot", "wa");
 		ast_to_dot(dotfile, $7.ast);
 		fclose(dotfile);
 		printf("now printing the whole tree \n");
@@ -331,26 +332,71 @@ expression:
 	|   IDENTIFICATEUR LPAREN liste_expressions RPAREN {
 
 			$$.ast = ast_new_vlpt($1, $3, VLPT_FUNC_CALL);
+			printf("added %d params to the function call of %s ---------------\n",param_counter,$1);
+
 		}
 ;
 
 // liste_expressions as a left-recursive AST list (linked via AST_VLPT nodes)
-liste_expressions:
+/*liste_expressions:
     expression {
 		ParamEntry *node = malloc(sizeof(ParamEntry));
 		node->param = $1.ast ;
 		node->next = $$ ;
 		$$ = node;
+		param_counter ++ ;
         //$$.ast = $1.ast;
 
     }
     | liste_expressions COMMA expression {
 	    ParamEntry *node = malloc(sizeof(ParamEntry));
-
+		param_counter ++ ;
 		node->param = $3.ast ;
 		node->next = $1 ;
 		$$ = node;
 		
+    }
+    |  { $$ = NULL; }
+;*/
+liste_expressions:
+    expression {
+        // Create the head of the list for a single expression
+        ParamEntry *node = malloc(sizeof(ParamEntry));
+        if (node) {
+            node->param = $1.ast;
+            node->next = NULL; // This is the end of the list
+            $$ = node;
+            param_counter++;
+        } else {
+            // Handle malloc failure
+            yyerror("Memory allocation failed for ParamEntry\n");
+            $$ = NULL;
+        }
+    }
+    | liste_expressions COMMA expression {
+        // Append the new expression to the existing list ($1)
+        ParamEntry *new_param = malloc(sizeof(ParamEntry));
+        if (new_param) {
+            new_param->param = $3.ast;
+            new_param->next = NULL; // This new param will be the new tail
+
+            // Find the current tail of the list ($1) and append new_param
+            ParamEntry *current = $1;
+            if (current == NULL) { // Should not happen if this rule is reached with non-empty liste_expressions
+                $$ = new_param;
+            } else {
+                while (current->next != NULL) {
+                    current = current->next;
+                }
+                current->next = new_param;
+                $$ = $1; // The head of the list remains $1
+            }
+            param_counter++;
+        } else {
+            // Handle malloc failure
+            yyerror("Memory allocation failed for ParamEntry\n");
+            $$ = $1; // Keep the existing list if allocation fails
+        }
     }
     | /* vide */ { $$ = NULL; }
 ;

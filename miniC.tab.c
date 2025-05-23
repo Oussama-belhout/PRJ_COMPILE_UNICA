@@ -86,8 +86,9 @@
 	int param_counter = 0;
 
 
+
 /* Line 189 of yacc.c  */
-#line 91 "miniC.tab.c"
+#line 92 "miniC.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -167,7 +168,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 19 "miniC.y"
+#line 20 "miniC.y"
  //         x {abr1 / integer i1} y{abr2 / string i2}
 	struct ast_container {
 		struct AST *ast;
@@ -193,7 +194,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 197 "miniC.tab.c"
+#line 198 "miniC.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -205,7 +206,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 209 "miniC.tab.c"
+#line 210 "miniC.tab.c"
 
 #ifdef short
 # undef short
@@ -522,14 +523,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    76,    76,    82,    83,    87,    88,    92,    93,    97,
-     101,   102,   106,   107,   113,   113,   113,   125,   126,   130,
-     131,   132,   136,   140,   166,   170,   171,   172,   173,   174,
-     179,   179,   189,   192,   198,   201,   204,   210,   217,   218,
-     228,   229,   234,   239,   242,   245,   252,   278,   287,   296,
-     300,   320,   321,   325,   326,   330,   331,   339,   347,   355,
-     359,   360,   364,   367,   374,   375,   376,   377,   378,   379,
-     380,   381,   385,   386,   390,   391,   392,   393,   394,   395
+       0,    77,    77,    83,    84,    88,    89,    93,    94,    98,
+     102,   103,   107,   108,   114,   114,   114,   126,   127,   131,
+     132,   133,   137,   141,   167,   171,   172,   173,   174,   175,
+     180,   180,   190,   193,   199,   202,   205,   211,   218,   219,
+     229,   230,   235,   240,   243,   246,   253,   279,   288,   297,
+     301,   321,   322,   326,   327,   331,   332,   362,   376,   401,
+     405,   406,   410,   413,   420,   421,   422,   423,   424,   425,
+     426,   427,   431,   432,   436,   437,   438,   439,   440,   441
 };
 #endif
 
@@ -1551,7 +1552,7 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 76 "miniC.y"
+#line 77 "miniC.y"
     {
 
 	;}
@@ -1560,14 +1561,14 @@ yyreduce:
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 106 "miniC.y"
+#line 107 "miniC.y"
     {;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 107 "miniC.y"
+#line 108 "miniC.y"
     {
 
 	;}
@@ -1576,23 +1577,23 @@ yyreduce:
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 113 "miniC.y"
+#line 114 "miniC.y"
     {enter_scope();printf("entering now scope-----\n"); ;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 113 "miniC.y"
+#line 114 "miniC.y"
     {exit_scope();printf("reduced-exited function-scope main ---------\n");;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 114 "miniC.y"
+#line 115 "miniC.y"
     {
-		FILE *dotfile = fopen("Graph.dot", "w");
+		FILE *dotfile = fopen("Graph.dot", "wa");
 		ast_to_dot(dotfile, (yyvsp[(7) - (8)].ast_contain).ast);
 		fclose(dotfile);
 		printf("now printing the whole tree \n");
@@ -1604,7 +1605,7 @@ yyreduce:
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 140 "miniC.y"
+#line 141 "miniC.y"
     {/*
 		InstructEntry *instr_entry = malloc(sizeof(InstructEntry));
 		InstructEntry *curr_bloc_instructs = get_bloc_instructs();
@@ -1635,42 +1636,42 @@ yyreduce:
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 166 "miniC.y"
+#line 167 "miniC.y"
     {(yyval.InstructEntry) = NULL;;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 170 "miniC.y"
+#line 171 "miniC.y"
     {;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 171 "miniC.y"
+#line 172 "miniC.y"
     {;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 172 "miniC.y"
+#line 173 "miniC.y"
     {;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 173 "miniC.y"
+#line 174 "miniC.y"
     {;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 174 "miniC.y"
+#line 175 "miniC.y"
     {
 			(yyval.ast_contain).ast = (yyvsp[(1) - (2)].ast_contain).ast;
 			//ast_print($$.ast);
@@ -1681,21 +1682,21 @@ yyreduce:
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 179 "miniC.y"
+#line 180 "miniC.y"
     {enter_scope();;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 179 "miniC.y"
+#line 180 "miniC.y"
     {exit_scope();(yyval.ast_contain) = (yyvsp[(2) - (2)].ast_contain);;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 189 "miniC.y"
+#line 190 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_for((yyvsp[(3) - (9)].ast_contain).ast, (yyvsp[(5) - (9)].ast_contain).ast, (yyvsp[(7) - (9)].ast_contain).ast, (yyvsp[(9) - (9)].ast_contain).ast);
     ;}
@@ -1704,7 +1705,7 @@ yyreduce:
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 192 "miniC.y"
+#line 193 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_while((yyvsp[(3) - (5)].ast_contain).ast, (yyvsp[(5) - (5)].ast_contain).ast);
     ;}
@@ -1713,7 +1714,7 @@ yyreduce:
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 198 "miniC.y"
+#line 199 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_if((yyvsp[(3) - (5)].ast_contain).ast, (yyvsp[(5) - (5)].ast_contain).ast, NULL);
     ;}
@@ -1722,7 +1723,7 @@ yyreduce:
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 201 "miniC.y"
+#line 202 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_if((yyvsp[(3) - (7)].ast_contain).ast, (yyvsp[(5) - (7)].ast_contain).ast, (yyvsp[(7) - (7)].ast_contain).ast);
     ;}
@@ -1731,7 +1732,7 @@ yyreduce:
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 204 "miniC.y"
+#line 205 "miniC.y"
     {
         //$$.ast = ast_new_switch($3.ast, $6.ast, $6.ast);
     ;}
@@ -1740,7 +1741,7 @@ yyreduce:
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 210 "miniC.y"
+#line 211 "miniC.y"
     {/*
         $$.ast->data.AST_SWITCH.cases = $1;
         $$.ast->data.AST_SWITCH.default_case = $2.ast;*/
@@ -1750,14 +1751,14 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 217 "miniC.y"
+#line 218 "miniC.y"
     { (yyval.CaseEntry) = NULL; ;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 218 "miniC.y"
+#line 219 "miniC.y"
     {
         /*CaseEntry *case_entry = malloc(sizeof(CaseEntry));
         instr_entry->case = $3.ast;
@@ -1770,14 +1771,14 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 228 "miniC.y"
+#line 229 "miniC.y"
     { (yyval.ast_contain).ast = NULL; ;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 229 "miniC.y"
+#line 230 "miniC.y"
     {
         //$$.ast = $3.ast;
     ;}
@@ -1786,7 +1787,7 @@ yyreduce:
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 234 "miniC.y"
+#line 235 "miniC.y"
     {
 		(yyval.ast_contain).ast = ast_new_vlpt((yyvsp[(1) - (5)].str), (yyvsp[(3) - (5)].ParamEntry), VLPT_FUNC_CALL);
 	;}
@@ -1795,7 +1796,7 @@ yyreduce:
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 239 "miniC.y"
+#line 240 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_break();
     ;}
@@ -1804,7 +1805,7 @@ yyreduce:
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 242 "miniC.y"
+#line 243 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_return(NULL);
     ;}
@@ -1813,7 +1814,7 @@ yyreduce:
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 245 "miniC.y"
+#line 246 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_return((yyvsp[(2) - (3)].ast_contain).ast);
     ;}
@@ -1822,7 +1823,7 @@ yyreduce:
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 252 "miniC.y"
+#line 253 "miniC.y"
     {
         printf("reducing now bloc\n");
 		(yyval.ast_contain).ast = ast_new_block((yyvsp[(3) - (4)].InstructEntry));
@@ -1834,7 +1835,7 @@ yyreduce:
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 278 "miniC.y"
+#line 279 "miniC.y"
     {
 			(yyval.ast_contain).ast = ast_new_aff((yyvsp[(1) - (3)].ast_contain).ast, (yyvsp[(3) - (3)].ast_contain).ast);
 			printf("just got the aff 	\n");
@@ -1845,7 +1846,7 @@ yyreduce:
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 287 "miniC.y"
+#line 288 "miniC.y"
     {
         if ((yyvsp[(1) - (1)].ast_contain).dim_entry != NULL) {
             (yyval.ast_contain).ast = ast_new_tab((yyvsp[(1) - (1)].ast_contain).dim_entry, (yyvsp[(1) - (1)].ast_contain).ast);
@@ -1858,7 +1859,7 @@ yyreduce:
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 296 "miniC.y"
+#line 297 "miniC.y"
     {
         (yyval.ast_contain).ast = ast_new_id((yyvsp[(1) - (1)].str));
         (yyval.ast_contain).dim_entry = NULL;
@@ -1868,7 +1869,7 @@ yyreduce:
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 300 "miniC.y"
+#line 301 "miniC.y"
     {
         // Add new dimension at the end of the list
         DimEntry *entry = malloc(sizeof(DimEntry));
@@ -1891,14 +1892,14 @@ yyreduce:
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 320 "miniC.y"
+#line 321 "miniC.y"
     { (yyval.ast_contain) = (yyvsp[(2) - (3)].ast_contain); ;}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 321 "miniC.y"
+#line 322 "miniC.y"
     {
 			(yyval.ast_contain).ast = ast_new_binop((yyvsp[(2) - (3)].str), (yyvsp[(1) - (3)].ast_contain).ast, (yyvsp[(3) - (3)].ast_contain).ast);
 			printf("reducing the bin op (%s) propagated to experession\n", (int)(yyvsp[(2) - (3)].str));
@@ -1908,14 +1909,14 @@ yyreduce:
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 325 "miniC.y"
+#line 326 "miniC.y"
     {(yyval.ast_contain).ast = ast_new_moins((yyvsp[(2) - (2)].ast_contain).ast);;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 326 "miniC.y"
+#line 327 "miniC.y"
     {
 					(yyval.ast_contain).ast = ast_new_number((yyvsp[(1) - (1)].integer));
 					printf("we got to const : %d \n",(yyvsp[(1) - (1)].integer));
@@ -1925,66 +1926,91 @@ yyreduce:
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 330 "miniC.y"
+#line 331 "miniC.y"
     {(yyval.ast_contain).ast = (yyvsp[(1) - (1)].ast_contain).ast;;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 331 "miniC.y"
+#line 332 "miniC.y"
     {
 
 			(yyval.ast_contain).ast = ast_new_vlpt((yyvsp[(1) - (4)].str), (yyvsp[(3) - (4)].ParamEntry), VLPT_FUNC_CALL);
+			printf("added %d params to the function call of %s ---------------\n",param_counter,(yyvsp[(1) - (4)].str));
+
 		;}
     break;
 
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 339 "miniC.y"
+#line 362 "miniC.y"
     {
-		ParamEntry *node = malloc(sizeof(ParamEntry));
-		node->param = (yyvsp[(1) - (1)].ast_contain).ast ;
-		node->next = (yyval.ParamEntry) ;
-		(yyval.ParamEntry) = node;
-        //$$.ast = $1.ast;
-
+        // Create the head of the list for a single expression
+        ParamEntry *node = malloc(sizeof(ParamEntry));
+        if (node) {
+            node->param = (yyvsp[(1) - (1)].ast_contain).ast;
+            node->next = NULL; // This is the end of the list
+            (yyval.ParamEntry) = node;
+            param_counter++;
+        } else {
+            // Handle malloc failure
+            yyerror("Memory allocation failed for ParamEntry\n");
+            (yyval.ParamEntry) = NULL;
+        }
     ;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 347 "miniC.y"
+#line 376 "miniC.y"
     {
-	    ParamEntry *node = malloc(sizeof(ParamEntry));
+        // Append the new expression to the existing list ($1)
+        ParamEntry *new_param = malloc(sizeof(ParamEntry));
+        if (new_param) {
+            new_param->param = (yyvsp[(3) - (3)].ast_contain).ast;
+            new_param->next = NULL; // This new param will be the new tail
 
-		node->param = (yyvsp[(3) - (3)].ast_contain).ast ;
-		node->next = (yyvsp[(1) - (3)].ParamEntry) ;
-		(yyval.ParamEntry) = node;
-		
+            // Find the current tail of the list ($1) and append new_param
+            ParamEntry *current = (yyvsp[(1) - (3)].ParamEntry);
+            if (current == NULL) { // Should not happen if this rule is reached with non-empty liste_expressions
+                (yyval.ParamEntry) = new_param;
+            } else {
+                while (current->next != NULL) {
+                    current = current->next;
+                }
+                current->next = new_param;
+                (yyval.ParamEntry) = (yyvsp[(1) - (3)].ParamEntry); // The head of the list remains $1
+            }
+            param_counter++;
+        } else {
+            // Handle malloc failure
+            yyerror("Memory allocation failed for ParamEntry\n");
+            (yyval.ParamEntry) = (yyvsp[(1) - (3)].ParamEntry); // Keep the existing list if allocation fails
+        }
     ;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 355 "miniC.y"
+#line 401 "miniC.y"
     { (yyval.ParamEntry) = NULL; ;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 359 "miniC.y"
+#line 405 "miniC.y"
     {(yyval.ast_contain).ast = ast_new_moins((yyvsp[(3) - (4)].ast_contain).ast);;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 360 "miniC.y"
+#line 406 "miniC.y"
     {
 			(yyval.ast_contain).ast = ast_new_binop((yyvsp[(2) - (3)].str), (yyvsp[(1) - (3)].ast_contain).ast, (yyvsp[(3) - (3)].ast_contain).ast);
 			printf("reducing the bin op (%s) propagated to experession\n", (int)(yyvsp[(2) - (3)].str));
@@ -1994,7 +2020,7 @@ yyreduce:
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 364 "miniC.y"
+#line 410 "miniC.y"
     {
 			(yyval.ast_contain).ast = (yyvsp[(2) - (3)].ast_contain).ast ;
 	;}
@@ -2003,7 +2029,7 @@ yyreduce:
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 367 "miniC.y"
+#line 413 "miniC.y"
     {
 			(yyval.ast_contain).ast = ast_new_binop((yyvsp[(2) - (3)].str), (yyvsp[(1) - (3)].ast_contain).ast, (yyvsp[(3) - (3)].ast_contain).ast);
 			printf("reducing the bin op (%s) propagated to experession\n", (int)(yyvsp[(2) - (3)].str));
@@ -2013,119 +2039,119 @@ yyreduce:
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 374 "miniC.y"
+#line 420 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 65:
 
 /* Line 1455 of yacc.c  */
-#line 375 "miniC.y"
+#line 421 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 376 "miniC.y"
+#line 422 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 67:
 
 /* Line 1455 of yacc.c  */
-#line 377 "miniC.y"
+#line 423 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 68:
 
 /* Line 1455 of yacc.c  */
-#line 378 "miniC.y"
+#line 424 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 379 "miniC.y"
+#line 425 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 380 "miniC.y"
+#line 426 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 381 "miniC.y"
+#line 427 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 385 "miniC.y"
+#line 431 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 386 "miniC.y"
+#line 432 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 390 "miniC.y"
+#line 436 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 391 "miniC.y"
+#line 437 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 392 "miniC.y"
+#line 438 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 393 "miniC.y"
+#line 439 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 394 "miniC.y"
+#line 440 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 395 "miniC.y"
+#line 441 "miniC.y"
     {(yyval.str) = (yyvsp[(1) - (1)].str);;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2129 "miniC.tab.c"
+#line 2155 "miniC.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2337,7 +2363,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 398 "miniC.y"
+#line 444 "miniC.y"
 
 int main()
 {

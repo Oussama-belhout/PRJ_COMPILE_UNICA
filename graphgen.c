@@ -16,11 +16,13 @@ void ast_to_dot(FILE *f, AST *root) {
     if (root)
         ast_to_dot_rec(f, root, -1, NULL);
     fprintf(f, "}\n");
+
 }
 
 void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
     if (!node) return;
     int my_id = get_next_dot_id();
+    printf(" getting to node ");ast_print(node);
 
     // Print this node
     switch (node->tag) {
@@ -31,7 +33,7 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             fprintf(f, "  n%d [label=\"%s\", shape=ellipse];\n", my_id, node->data.AST_ID.id);
             break;
         case AST_AFF:
-            fprintf(f, "  n%d [label=\"=\", shape=diamond];\n", my_id);
+            fprintf(f, "  n%d [label=\":=\", shape=diamond];\n", my_id);
             break;
         case AST_BINOP:
             fprintf(f, "  n%d [label=\"%s\", shape=diamond];\n", my_id, node->data.AST_BINOP.op ? node->data.AST_BINOP.op : "?");
@@ -128,7 +130,8 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
         case AST_VLPT: {
             ParamEntry *p = node->data.AST_VLPT.params;
             int idx = 0;
-            while (p) {
+            while (p != NULL) {
+                printf("param : ");ast_print(p->param);
                 char label[16];
                 snprintf(label, sizeof(label), "arg%d", idx++);
                 ast_to_dot_rec(f, p->param, my_id, label);

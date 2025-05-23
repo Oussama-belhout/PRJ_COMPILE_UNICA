@@ -1,6 +1,4 @@
 entering now scope-----
-just got the id i 
-just got the id j 
 we got to const : 3 
 just created new_binop
 (j / 3)
@@ -8,23 +6,17 @@ reducing the bin op (/) propagated to experession
 just got the aff 	
 aff (i = (j / 3)
 )
-just got the id i 
-just got the id j 
 just created new_binop
 (i + j)
 reducing the bin op (+) propagated to experession
-just got the id i 
-just got the id n 
 we got to const : 4 
 just created new_binop
 (n + 4)
 reducing the bin op (+) propagated to experession
 we got to const : 45000 
-just got the id j 
 just created new_binop
 (45000 + j)
 reducing the bin op (+) propagated to experession
-just got the id i 
 we got to const : 123 
 just created new_binop
 (i + 123)
@@ -34,8 +26,6 @@ we got to const : 123
 just created new_binop
 (45000 + 123)
 reducing the bin op (+) propagated to experession
-just got the id i 
-just got the id j 
 we got to const : 0 
 just created new_binop
 (j + 0)
@@ -44,22 +34,18 @@ just created new_binop
 (i + (j + 0)
 )
 reducing the bin op (+) propagated to experession
-just got the id i 
 we got to const : 0 
 just created new_binop
 (i + 0)
 reducing the bin op (+) propagated to experession
-just got the id j 
 just created new_binop
 ((i + 0)
  + j)
 reducing the bin op (+) propagated to experession
-just got the id i 
 we got to const : 0 
 just created new_binop
 (i + 0)
 reducing the bin op (+) propagated to experession
-just got the id j 
 we got to const : 0 
 just created new_binop
 (j + 0)
@@ -69,7 +55,6 @@ just created new_binop
  + (j + 0)
 )
 reducing the bin op (+) propagated to experession
-just got the id i 
 we got to const : 0 
 just created new_binop
 (i + 0)
@@ -80,7 +65,6 @@ just created new_binop
  + 123)
 reducing the bin op (+) propagated to experession
 we got to const : 45000 
-just got the id j 
 we got to const : 0 
 just created new_binop
 (j + 0)
@@ -102,7 +86,7 @@ we got to const : 0
 -- reducing instruction list one-by-one , inst number : 9
 -- reducing instruction list one-by-one , inst number : 10
 reducing now bloc
-Created AST_BLOCK with instructs: 00ABB5C8
+Created AST_BLOCK with instructs: 00C7B388
 this bloc has 11 instructions`- Block -- 0
    |- Assign
    |  |- Id: i
@@ -118,8 +102,83 @@ this bloc has 11 instructions`- Block -- 0
    |- VLPT [id: printd, type: FUNC_CALL]
    |- VLPT [id: printd, type: FUNC_CALL]
    |- VLPT [id: last, type: FUNC_CALL]
-  (Null Instruction)
+   `- Return
+      `- Number: 0
 exiting now scope 1
 exiting now scope 2
 reduced-exited function-scope main ---------
-now printing the whole tree 
+ getting to node {
+  aff (i = (j / 3)
+)
+
+  VLPT(id: dinging, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  VLPT(id: last, type: FUNC_CALL, params: )
+
+  return 0;
+}
+ getting to node aff (i = (j / 3)
+)
+ getting to node i getting to node (j / 3)
+ getting to node j getting to node 3 getting to node VLPT(id: dinging, type: FUNC_CALL, params: )
+param : (i + j)
+ getting to node (i + j)
+ getting to node i getting to node jparam : i getting to node iparam : (n + 4)
+ getting to node (n + 4)
+ getting to node n getting to node 4 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : (45000 + j)
+ getting to node (45000 + j)
+ getting to node 45000 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : (i + 123)
+ getting to node (i + 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : (45000 + 123)
+ getting to node (45000 + 123)
+ getting to node 45000 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : (i + (j + 0)
+)
+ getting to node (i + (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : ((i + 0)
+ + j)
+ getting to node ((i + 0)
+ + j)
+ getting to node (i + 0)
+ getting to node i getting to node 0 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : ((i + 0)
+ + (j + 0)
+)
+ getting to node ((i + 0)
+ + (j + 0)
+)
+ getting to node (i + 0)
+ getting to node i getting to node 0 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : ((i + 0)
+ + 123)
+ getting to node ((i + 0)
+ + 123)
+ getting to node (i + 0)
+ getting to node i getting to node 0 getting to node 123 getting to node VLPT(id: last, type: FUNC_CALL, params: )
+param : (45000 + (j + 0)
+)
+ getting to node (45000 + (j + 0)
+)
+ getting to node 45000 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node return 0; getting to node 0now printing the whole tree 

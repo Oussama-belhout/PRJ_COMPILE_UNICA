@@ -92,7 +92,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 19 "miniC.y"
+#line 20 "miniC.y"
  //         x {abr1 / integer i1} y{abr2 / string i2}
 	struct ast_container {
 		struct AST *ast;
