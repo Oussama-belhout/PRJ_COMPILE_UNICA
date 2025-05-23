@@ -1,0 +1,136 @@
+La déclaration d’une fonction
+ Chaque fonction dans un programme miniC dont le corps est défini par programme doit être traduite
+ sous forme d’un arbre abstrait, dont la racine est un nœud sous forme de trapèze vers le bas de couleur
+ bleue. L’étiquette du nœud doit contenir le nom de la fonction et son type (soit int soit void). 
+comme :
+digraph mon_programme {
+ node_mafonction [label="foo, void" shape=invtrapezium color=blue];
+ node_reste [shape=triangle label="..." style=dotted];
+ node_mafonction-> node_reste
+ }
+
+Une séquence d’instructions
+ Une séquence ou un bloc d’instructions INST1, INST2, INST3, ... doit être traduite en un arbre dont
+ la racine ovale est appelée BLOC. Chaque instruction du bloc devient ainsi fils
+ de la racine.
+comme :
+ digraph mon_programme {
+ node_bloc [label="BLOC" shape=ellipse];
+ // les instructions du bloc doivent êtres mises comme fils de la racine
+ node_inst1 [shape=triangle label="INST1" style=dotted];
+ node_inst2 [shape=triangle label="INST2" style=dotted];
+ node_inst3 [shape=triangle label="INST3" style=dotted];
+ node_bloc-> node_inst1
+ node_bloc-> node_inst2
+ node_bloc-> node_inst3
+ }
+
+L’instruction d’affectation
+ Une instruction d’affectation de la forme var = EXPR; doit être traduite en un arbre dont la racine ovale est
+ appelée :=. Le fils gauche doit être étiqueté par le nom de la variable affectée, et le fils droit doit être le nom
+ de la variable affecté et le membre droit c'est la sous-arbre décrivant l’expression.
+comme :
+ digraph mon_programme {
+ node_affect [label=":=" shape=ellipse];
+ node_var [shape=ellipse label="nom_var"];
+ node_expr [shape=triangle label="INST2" style=dotted];
+ node_affect-> node_var
+ node_affect-> node_expr
+ }
+
+Les expressions arithmétiques ou logiques
+ Les expressions arithmétiques ou logiques doivent être converties en arbres binaires (qui décrivent le code
+ trois adresses). Chaque nœud de l’arbre binaire est étiqueté par l’opération de base (addition, soustraction,
+ ETlogique, OU logique, etc). Le fils gauche contient le premier opérande, et le fils droit le deuxième opérande.
+comme :
+digraph mon_programme {
+ node_1 [label=":=" shape=ellipse];
+ node_2 [shape=ellipse label="toto"];
+ node_3 [shape=ellipse label="-"];
+ node_4 [shape=ellipse label="*"];
+ node_5 [shape=ellipse label="*"];
+ node_6 [shape=ellipse label="/"];
+ node_7 [shape=ellipse label="x"];
+ node_8 [shape=ellipse label="y"];
+ node_9 [shape=ellipse label="z"];
+ node_10 [shape=ellipse label="t"];
+ node_11 [shape=ellipse label="6"];
+ node_1-> node_2;
+ node_1-> node_3;
+ node_3-> node_4;
+ node_3-> node_5;
+ node_4-> node_7;
+ node_4-> node_8;
+ node_5-> node_6;
+ node_5-> node_11;
+ node_6-> node_9;
+ node_6-> node_10;
+ }
+
+Les références à un élément de tableau
+ Une référence à un élément de tableau multidimensionnel comme montab[i1][i2][i3] doit être traduite
+ en un arbre binaire dont la racine est étiquetée par TAB. Le premier fils doit contenir le nom du tableau
+ référencé. Le 2e fils contient l’expression du premier indice de tableau (une variable, une constante ou une
+ expression arithmétique). Le 3e fils contient l’expression du 2e indice de tableau, ainsi de suite pour toutes
+ les dimensions du tableau. 
+
+Les expressions conditionnelles
+ Les expressions conditionnelles qui contiennent des opérateurs de comparaison >, <, <=, >=, ==,!=
+ doivent être traduites en arbres binaires. La racine de l’arbre doit être étiquetée par l’opérateur de comparaison, le
+ fils gauche par la première expression arithmétique, et le fils droit par la deuxième expression
+ arithmétique 
+
+L’instruction de retour d’une fonction
+ Chaque instruction return dans une fonction doit être traduite en un nœud sous forme de trapèze vers
+ le haut de couleur bleue, étiqueté avec le mot clé RETURN. Le fils de ce nœud doit correspondre à la valeur
+ retournée. C’est soit une constante, soit une variable simple, soit une expression arithmétique sous forme
+ d’arbre binaire.Si l’instruction return ne retourne aucune valeur, alors il n’y a pas de nœud fils.
+comme :
+digraph mon_programme {
+ node_return [label="RETURN" shape=trapezium color=blue];
+ node_exp [shape=invtriangle label="..." style=dotted];
+ node_exp-> node_return
+}
+
+L’instruction conditionnelle if-then et if-then-else
+ Les instructions conditionnelles doivent être traduites en un arbre avec une racine étiquetée avec le mot clé
+ IF, avec une forme de losange. La forme de losange peut être obtenue en utilisant l’attribut [shape=diamond]
+ sur le nœud. Le premier fils de la racine est le sous-arbre décrivant la condition sous forme d’arbre binaire.
+ Le deuxième fils est le bloc d’instructions de la branche THEN. Le troisième fils serait éventuellement le bloc
+ des instructions ELSE s’il existe.
+
+L’instruction switch
+ Uneinstruction switch doit être traduite en un arbre dont la racine est étiquetée avec le mot clé SWITCH.
+ Le premier fils correspond à l’expression du SWITCH. Ensuite chaque fils correspond au n-ème cas de switch.
+ Le dernier fils doit correspondre au cas par défaut.
+
+L’instruction de boucle for
+ Une instruction de boucle for doit être traduite en un arbre dont la racine est étiquetée avec le mot clé
+ FOR. Le premier fils correspond à l’instruction d’initialisation de la boucle for. Le deuxième fils correspond
+ à la condition du for. Le 3e fils correspond à l’instruction de post-condition. Le 4e fils correspond au corps
+ de la boucle. 
+
+L’instruction de boucle while
+ Une instruction de boucle while doit être traduite en un arbre dont la racine est étiquetée avec le mot
+ clé WHILE. Le premier fils correspond à la condition du while (sous forme d’arbre binaire comme une
+ expression). Le 2e fils correspond au corps de la boucle.
+
+L’instruction break
+ L’instruction break doit apparaître avec une forme rectangulaire ,
+ et étiquetée avec le mot clé BREAK. La forme rectangulaire peut être obtenue en appliquant l’attribut
+ shape=box sur le nœud. 
+
+L’appel d’une fonction
+ Un appel d’une fonction foo(param1, param2, param3, ...) doit être traduit en un arbre binaire
+ dont la racine est étiquetée avec le nom de la fonction, avec une forme de polygone. Chaque fils de la racine
+ correspond à un paramètre de l’appel de fonction
+comme :
+digraph mon_programme {
+ node_1 [label="foo" shape=septagon];
+ node_2 [shape=triangle label="param1" style=dotted];
+ node_3 [shape=triangle label="param2" style=dotted];
+ node_4 [shape=triangle label="param3" style=dotted];
+ node_1-> node_2
+ node_1-> node_3
+ node_1-> node_4
+ }

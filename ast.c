@@ -48,6 +48,26 @@ AST *ast_new_aff(AST *id, AST *number) {
     }
     return node;
 }
+AST *ast_new_func(char *type, AST *id, AST *body) {
+    AST *node = malloc(sizeof(AST));
+    if (node) {
+        node->tag = AST_FUNC;
+        node->data.AST_FUNC.id = id;
+        node->data.AST_FUNC.type = type;
+        node->data.AST_FUNC.body = body;
+    }
+    return node;
+}
+/*
+AST *ast_new_func_dec(AST *function, AST *next_function) {
+    AST *node = malloc(sizeof(AST));
+    if (node) {
+        node->tag = AST_FUNC_DEC;
+        node->data.AST_FUNC_DEC.function = function;
+        node->data.AST_FUNC_DEC.next_function = next_function;
+    }
+    return node;
+}*/
 AST *ast_new_if(AST *cond, AST *then_branch, AST *else_branch) {
     AST *node = malloc(sizeof(AST));
     if (node) {
@@ -199,7 +219,14 @@ void ast_print(AST *node) {
             printf(" = ");
             ast_print(node->data.AST_AFF.op2);
             printf(")\n");
-            break;
+            break;/*
+        case AST_FUNC_DEC:
+            printf(" function ");
+            ast_print(node->data.AST_FUNC_DEC.id);
+            printf(" : ");
+            ast_print(node->data.AST_FUNC_DEC.body);
+            printf(")\n");
+            break;*/
 
         case AST_BLOCK:
             printf("{\n");
@@ -212,6 +239,7 @@ void ast_print(AST *node) {
             }
             printf("}\n");
             break;
+
         case AST_FOR:
             printf("for (");
             ast_print(node->data.AST_FOR.init);
@@ -324,6 +352,15 @@ void ast_print(AST *node) {
             break;
     }
 }
+void ast_print_function(FuncEntry *functions){
+    while (functions)
+    {
+        ast_print_tree(functions->function, "", true);
+        functions = functions->next;
+    }
+    
+}
+
 void ast_print_tree_param_list(ParamEntry *param, const char *prefix, bool is_last) {
     int count = 0;
     while (param) {
@@ -412,6 +449,7 @@ void ast_print_tree(AST *node, const char *prefix, bool is_last) {
                 ast_print_tree(node->data.AST_AFF.op2, new_prefix, true);
             }
             break;
+
         case AST_IF:
             printf("If\n");
             {

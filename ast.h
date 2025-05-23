@@ -33,6 +33,13 @@ typedef struct DimEntry
 
 }DimEntry;
 
+typedef struct FuncEntry
+{
+    AST* function; // AST_FUNC
+    struct FuncEntry *next;
+
+}FuncEntry;
+
 typedef struct CaseEntry {
     AST *value;           // Expression for the case (usually a constant)
     AST *body;            // Instruction or block for this case
@@ -60,6 +67,7 @@ struct AST {
         AST_BREAK,
         AST_RETURN,
         AST_FUNC,
+        AST_FUNC_DEC,
     } tag;
     union {
         struct {
@@ -68,6 +76,11 @@ struct AST {
         struct {
             char *id;
         } AST_ID;
+        struct {
+            AST *id;
+            char* type;
+            AST *body;
+        } AST_FUNC;
         struct {
             AST *init;        // initial assignment
             AST *cond;        // loop condition
@@ -85,6 +98,10 @@ struct AST {
             AST *op1;
             AST *op2;
         } AST_AFF;
+        struct {
+            AST *function;              // AST_FUNC node (the function root)
+            struct AST *next_function;  // Next AST_FUNC_DEC node (linked list)
+        } AST_FUNC_DEC;
         struct { // Switch-case
             AST *expr;         // Expression to match
             CaseEntry *cases;  // Linked list of cases
@@ -130,6 +147,8 @@ AST *second_child_term;
 AST *ast_new_number(int number);
 AST *ast_new_id(char *id);
 AST *ast_new_aff(AST *id, AST *number);
+//AST *ast_new_func_dec(char *type,AST *id, AST *body);
+AST *ast_new_func(char *type, AST *id, AST *body);
 AST *ast_new_block(struct InstructEntry *instructs);
 AST *ast_new_vlpt(char* id,ParamEntry *params, int vlpt_type);
 AST *ast_new_binop(char* operation, AST *left, AST *right);
@@ -146,5 +165,7 @@ void add_bloc_instr(AST *instr);
 void initialize_term();
 void ast_print(AST *node);
 void ast_print_tree(AST *node, const char *prefix, bool is_last);
+void ast_print_function(FuncEntry *functions);
+
 
 #endif // AST_H

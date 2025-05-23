@@ -1,5 +1,6 @@
 %{
 	#include <stdio.h>
+    #include <stdbool.h>
 	#include "ast.h"
 	#include "symtab.h"
 	#include "graphgen.h"
@@ -10,10 +11,12 @@
 	int nb_line=1;
 	ParamEntry *params;
 	int col=1;
-	AST *ops[3]; 
+    bool empty_return = false ;
 	int ops_counter = 0;
 	int param_counter = 0;
+    int func_counter = 0 ;
 
+    void ast_to_dot_rec(FILE *f, struct AST *node, int parent_id, const char *edge_label);
 %}
 
 
@@ -33,20 +36,23 @@
     struct AST *ast;
     struct AST **ast_list;
 	struct ast_container ast_contain;
+	
+	struct InstructEntry *InstructEntry;
 	struct ParamEntry *ParamEntry;
+	struct FuncEntry *FuncEntry;
 	struct CaseEntry *CaseEntry ;
 	struct DimEntry *DimEntry;
-	struct InstructEntry *InstructEntry;
 
 }
 
-%type <ast_contain> expression affectation appel saut instruction variable bloc var condition selection default_case switch_block iteration
+%type <ast_contain> expression affectation appel fonction saut instruction variable bloc var condition selection default_case switch_block iteration
 %type <InstructEntry> liste_instructions
 %type <ParamEntry> liste_expressions
 %type <DimEntry> declarateur 
+%type <FuncEntry> liste_fonctions
 %type <CaseEntry> cases
 %type <str> binary_comp binary_rel
-%type <str> binary_op
+%type <str> binary_op type
 
 %token <str>IDENTIFICATEUR <integer>CONSTANTE VOID INT FOR WHILE IF ELSE SWITCH CASE DEFAULT
 %token BREAK RETURN <str>PLUS <str>MOINS <str>MUL <str>DIV <str>LSHIFT <str>RSHIFT <str>BAND <str>BOR <str>LAND <str>LOR <str>LT <str>GT  
@@ -75,7 +81,7 @@
 %%
 programme:
     liste_declarations liste_fonctions {
-
+		//transpile($2);
 	}
 ;
 
@@ -88,11 +94,54 @@ liste_declarations:
 declaration_fonction:
 	| declaration_fonction EXTERN type IDENTIFICATEUR LPAREN liste_parms RPAREN SEMICOLON
 ;
-
 liste_fonctions:
-	liste_fonctions fonction // $$ = $2
-	|   fonction // $$ = 1
+    fonction {
+
+    }
+    | liste_fonctions fonction {}
 ;
+/*
+liste_fonctions:
+    fonction {
+        // Create the head of the list for a single expression
+        FuncEntry *node = malloc(sizeof(FuncEntry));
+        if (node) {
+            node->function = $1.ast;
+            node->next = NULL; // This is the end of the list
+            $$ = node;
+            param_counter++;
+        } else {
+            // Handle malloc failure
+            yyerror("Memory allocation failed for Function entry\n");
+            $$ = NULL;
+        }
+    }
+    | liste_fonctions fonction {
+        // Append the new expression to the existing list ($1)
+        FuncEntry *new_param = malloc(sizeof(FuncEntry));
+        if (new_param) {
+            new_param->function = $2.ast;
+            new_param->next = NULL; // This new param will be the new tail
+
+            // Find the current tail of the list ($1) and append new_param
+            FuncEntry *current = $1;
+            if (current == NULL) { // Should not happen if this rule is reached with non-empty liste_expressions
+                $$ = new_param;
+            } else {
+                while (current->next != NULL) {
+                    current = current->next;
+                }
+                current->next = new_param;
+                $$ = $1; // The head of the list remains $1
+            }
+            param_counter++;
+        } else {
+            // Handle malloc failure
+            yyerror("Memory allocation failed for Function Entry\n");
+            $$ = $1; // Keep the existing list if allocation fails
+        }
+    }
+;*/
 
 declaration:
 	type liste_declarateurs SEMICOLON
@@ -111,20 +160,38 @@ declarateur:
 ;
 
 fonction:
-	type IDENTIFICATEUR LPAREN liste_parms RPAREN {enter_scope();printf("entering now scope-----\n"); } bloc {exit_scope();printf("reduced-exited function-scope main ---------\n");} // here we call 
-	{
-		FILE *dotfile = fopen("Graph.dot", "wa");
-		ast_to_dot(dotfile, $7.ast);
-		fclose(dotfile);
-		printf("now printing the whole tree \n");
-        //ast_print_tree(first_child_term, "", true);
+    type IDENTIFICATEUR LPAREN liste_parms RPAREN {enter_scope(); printf("entering now scope-----\n"); } bloc {exit_scope(); printf("reduced-exited function-scope main ---------\n");}
+    {
+        // Open the DOT file in append mode (or create a new one for each function if you prefer)
+        FILE *dotfile = fopen("Graph.dot", "a");
 
-	} //TODO verification s'il exist un return si le type EST INT !!!
+        if (!dotfile) {
+            fprintf(stderr, "Cannot open Graph.dot for writing\n");
+        } else {
+            // Unique root node for this function
+            static int func_root_counter = 0;
+            int root_id = 10000 + func_root_counter++; // Large number to avoid collision
+
+            // Print the root node as a blue downward trapezoid
+
+            // Connect the root to the function AST
+            // $6.ast is the function body (AST_BLOCK), so create a temporary AST_FUNC node if needed
+            AST *func_root = ast_new_func($1, ast_new_id($2), $7.ast);
+
+            // Generate the DOT for the function body, with the root as parent
+            ast_to_dot_rec(dotfile, func_root, root_id, NULL);
+
+            // Optionally, free func_root if you don't need it elsewhere
+            free(func_root);
+
+            fclose(dotfile);
+        }
+    } //TODO verification s'il exist un return si le type EST INT !!!
 ;
 
 type:
-	VOID
-	|   INT
+    VOID { $$ = "void"; }
+    | INT { $$ = "int"; }
 ;
 
 liste_parms:
@@ -242,6 +309,7 @@ saut:
     }
     | RETURN SEMICOLON {
         $$.ast = ast_new_return(NULL);
+        empty_return = true ;
     }
     | RETURN expression SEMICOLON {
         $$.ast = ast_new_return($2.ast);
@@ -249,12 +317,12 @@ saut:
 ;
 
 // ---------------------------------
-bloc: // TODO la rendre "LBRACE bloc_liste_declarations..."
+bloc: // TODO la rendre "LBRACE bloc_liste_declarations..." pour la possiblité de declaration au deb bloc
 	LBRACE liste_declarations  liste_instructions RBRACE {
         printf("reducing now bloc\n");
 		$$.ast = ast_new_block($3);
 		printf("this bloc has %d instructions",ops_counter);
-		ast_print_tree($$.ast, "", true);
+		//ast_print_tree($$.ast, "", true);
 	}
 ;/*
 bloc_liste_declarations : 
@@ -333,6 +401,7 @@ expression:
 
 			$$.ast = ast_new_vlpt($1, $3, VLPT_FUNC_CALL);
 			printf("added %d params to the function call of %s ---------------\n",param_counter,$1);
+			param_counter = 0;
 
 		}
 ;
@@ -444,8 +513,15 @@ binary_comp:
 %%
 int main()
 {
+    FILE *dotfile = fopen("Graph.dot", "w");
+    fprintf(dotfile, "digraph AST {\n");
+    fclose(dotfile);
+
 	yyparse();
 
+    FILE *f = fopen("Graph.dot", "a");
+    fprintf(f, "}\n");
+    fclose(f);
 }
 int yywrap()
 {}

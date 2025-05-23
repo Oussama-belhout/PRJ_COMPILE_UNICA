@@ -30,11 +30,11 @@ IS                      (u|U|l|L)*
 "extern"                { col += yyleng;  return EXTERN; }
 "for"                   { col += yyleng;  return FOR; }
 "if"                    { col += yyleng;  return IF; }
-"int"                   { col += yyleng;  return INT; }
+"int"                   { yylval.str = strdup(yytext); col += yyleng;  return INT; }
 "return"                { col += yyleng;  return RETURN; }
 "switch"                { col += yyleng;  return SWITCH; }
 "then"                  { col += yyleng;  return THEN; }
-"void"                  { col += yyleng;  return VOID; }
+"void"                  { yylval.str = strdup(yytext); col += yyleng;  return VOID; }
 "while"                 { col += yyleng;  return WHILE; }
 "break"                 { col += yyleng;  return BREAK; }
 

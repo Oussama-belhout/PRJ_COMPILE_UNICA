@@ -6,5 +6,5 @@
 
 // Writes the AST as a DOT graph to the given file.
 void ast_to_dot(FILE *f, AST *root);
-
+void transpile(FuncEntry *functions);
 #endif // GRAPHGEN_H

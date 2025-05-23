@@ -723,7 +723,7 @@ YY_RULE_SETUP
 case 8:
 YY_RULE_SETUP
 #line 33 "ANSI-C.l"
-{ col += yyleng;  return INT; }
+{ yylval.str = strdup(yytext); col += yyleng;  return INT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
@@ -743,7 +743,7 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 37 "ANSI-C.l"
-{ col += yyleng;  return VOID; }
+{ yylval.str = strdup(yytext); col += yyleng;  return VOID; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP

@@ -1,0 +1,61 @@
+entering now scope-----
+we got to const : 1 
+just created new_binop
+(n <= 1)
+reducing the bin op (<=) propagated to experession
+we got to const : 1 
+we got to const : 1 
+just created new_binop
+(n - 1)
+reducing the bin op (-) propagated to experession
+added 1 params to the function call of fact ---------------
+just created new_binop
+(n * VLPT(id: fact, type: FUNC_CALL, params: )
+)
+reducing the bin op (*) propagated to experession
+-- reducing instruction list one-by-one , inst number : 0
+-- reducing instruction list one-by-one , inst number : 1
+-- reducing instruction list one-by-one , inst number : 2
+reducing now bloc
+Created AST_BLOCK with instructs: 00C2ABD0
+this bloc has 3 instructionsexiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+ getting to node Unknown getting to node {
+  if ((n <= 1)
+) break;
+
+  return 1;
+  return (n * VLPT(id: fact, type: FUNC_CALL, params: )
+)
+;
+}
+ getting to node if ((n <= 1)
+) break;
+ getting to node (n <= 1)
+ getting to node n getting to node 1 getting to node break; getting to node return 1; getting to node 1 getting to node return (n * VLPT(id: fact, type: FUNC_CALL, params: )
+)
+; getting to node (n * VLPT(id: fact, type: FUNC_CALL, params: )
+)
+ getting to node n getting to node VLPT(id: fact, type: FUNC_CALL, params: )
+param : (n - 1)
+ getting to node (n - 1)
+ getting to node n getting to node 1entering now scope-----
+we got to const : 10 
+added 1 params to the function call of fact ---------------
+-- reducing instruction list one-by-one , inst number : 3
+-- reducing instruction list one-by-one , inst number : 4
+reducing now bloc
+Created AST_BLOCK with instructs: 00C2ACB0
+this bloc has 5 instructionsexiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+ getting to node Unknown getting to node {
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+  return;
+}
+ getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : VLPT(id: fact, type: FUNC_CALL, params: )
+ getting to node VLPT(id: fact, type: FUNC_CALL, params: )
+param : 10 getting to node 10 getting to node return;
