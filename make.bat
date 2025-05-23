@@ -20,7 +20,7 @@ rem Check if the user provided an index as an argument
 
     rem --- Step 3: Compile the lexer, parser, and libraries ---
     echo Compiling with GCC...
-    gcc -o compiler lex.yy.c miniC.tab.c ast.c symtab.c -lfl -lm 
+    gcc -o compiler lex.yy.c miniC.tab.c ast.c symtab.c graphgen.c -lfl -lm 
     if %errorlevel% neq 0 (
         echo Compilation failed. Exiting...
         exit /b

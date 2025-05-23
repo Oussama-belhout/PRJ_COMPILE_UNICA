@@ -6,4 +6,5 @@ int main() {
 	if (i==5) break;
    }
    printd(i);
+   return (i + 89 / 9 +  printd(i));
 }

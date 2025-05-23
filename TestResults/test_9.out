@@ -1,0 +1,8 @@
+entering now scope-----
+just got the aff 	
+aff (i = j)
+we got to const : 10 
+just created new_binop
+(i < 10)
+reducing the bin op (<) propagated to experession
+syntax error a la ligne 7 colonne 6 in front of =

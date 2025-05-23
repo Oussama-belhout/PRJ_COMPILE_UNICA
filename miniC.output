@@ -56,12 +56,13 @@ Grammaire
    34          | IF LPAREN condition RPAREN instruction ELSE instruction
    35          | SWITCH LPAREN expression RPAREN LBRACE switch_block RBRACE
 
-   36 switch_block: /* vide */
-   37             | cases
-   38             | DEFAULT COLON instruction
+   36 switch_block: cases default_case
 
-   39 cases: CASE CONSTANTE COLON instruction cases
-   40      | CASE CONSTANTE COLON instruction
+   37 cases: /* vide */
+   38      | cases CASE CONSTANTE COLON instruction
+
+   39 default_case: /* vide */
+   40             | DEFAULT COLON instruction
 
    41 appel: IDENTIFICATEUR LPAREN liste_expressions RPAREN SEMICOLON
 
@@ -73,51 +74,53 @@ Grammaire
 
    46 affectation: variable OP expression
 
-   47 variable: IDENTIFICATEUR
-   48         | variable LBRACKET expression RBRACKET
+   47 variable: var
 
-   49 expression: LPAREN expression RPAREN
-   50           | expression binary_op expression
-   51           | MOINS expression
-   52           | CONSTANTE
-   53           | variable
-   54           | IDENTIFICATEUR LPAREN liste_expressions RPAREN
+   48 var: IDENTIFICATEUR
+   49    | var LBRACKET expression RBRACKET
 
-   55 liste_expressions: liste_expressions COMMA expression
-   56                  | expression
-   57                  | /* vide */
+   50 expression: LPAREN expression RPAREN
+   51           | expression binary_op expression
+   52           | MOINS expression
+   53           | CONSTANTE
+   54           | variable
+   55           | IDENTIFICATEUR LPAREN liste_expressions RPAREN
 
-   58 condition: NOT LPAREN condition RPAREN
-   59          | condition binary_rel condition
-   60          | LPAREN condition RPAREN
-   61          | expression binary_comp expression
+   56 liste_expressions: expression
+   57                  | liste_expressions COMMA expression
+   58                  | /* vide */
 
-   62 binary_op: PLUS
-   63          | MOINS
-   64          | MUL
-   65          | DIV
-   66          | LSHIFT
-   67          | RSHIFT
-   68          | BAND
-   69          | BOR
+   59 condition: NOT LPAREN condition RPAREN
+   60          | condition binary_rel condition
+   61          | LPAREN condition RPAREN
+   62          | expression binary_comp expression
 
-   70 binary_rel: LAND
-   71           | LOR
+   63 binary_op: PLUS
+   64          | MOINS
+   65          | MUL
+   66          | DIV
+   67          | LSHIFT
+   68          | RSHIFT
+   69          | BAND
+   70          | BOR
 
-   72 binary_comp: LT
-   73            | GT
-   74            | GEQ
-   75            | LEQ
-   76            | EQ
-   77            | NEQ
+   71 binary_rel: LAND
+   72           | LOR
+
+   73 binary_comp: LT
+   74            | GT
+   75            | GEQ
+   76            | LEQ
+   77            | EQ
+   78            | NEQ
 
 
 Terminaux, suivis des règles où ils apparaissent
 
 $end (0) 0
 error (256)
-IDENTIFICATEUR (258) 5 11 15 21 41 47 54
-CONSTANTE (259) 12 39 40 52
+IDENTIFICATEUR (258) 5 11 15 21 41 48 55
+CONSTANTE (259) 12 38 53
 VOID (260) 16
 INT (261) 17 21
 FOR (262) 31
@@ -125,37 +128,37 @@ WHILE (263) 32
 IF (264) 33 34
 ELSE (265) 34
 SWITCH (266) 35
-CASE (267) 39 40
-DEFAULT (268) 38
+CASE (267) 38
+DEFAULT (268) 40
 BREAK (269) 42
 RETURN (270) 43 44
-PLUS (271) 62
-MOINS (272) 51 63
-MUL (273) 64
-DIV (274) 65
-LSHIFT (275) 66
-RSHIFT (276) 67
-BAND (277) 68
-BOR (278) 69
-LAND (279) 70
-LOR (280) 71
-LT (281) 72
-GT (282) 73
-GEQ (283) 74
-LEQ (284) 75
-EQ (285) 76
-NEQ (286) 77
-NOT (287) 58
+PLUS (271) 63
+MOINS (272) 52 64
+MUL (273) 65
+DIV (274) 66
+LSHIFT (275) 67
+RSHIFT (276) 68
+BAND (277) 69
+BOR (278) 70
+LAND (279) 71
+LOR (280) 72
+LT (281) 73
+GT (282) 74
+GEQ (283) 75
+LEQ (284) 76
+EQ (285) 77
+NEQ (286) 78
+NOT (287) 59
 EXTERN (288) 5
 LBRACE (289) 35 45
 RBRACE (290) 35 45
-LPAREN (291) 5 15 31 32 33 34 35 41 49 54 58 60
-RPAREN (292) 5 15 31 32 33 34 35 41 49 54 58 60
-COMMA (293) 9 18 55
-LBRACKET (294) 12 48
-RBRACKET (295) 12 48
+LPAREN (291) 5 15 31 32 33 34 35 41 50 55 59 61
+RPAREN (292) 5 15 31 32 33 34 35 41 50 55 59 61
+COMMA (293) 9 18 57
+LBRACKET (294) 12 49
+RBRACKET (295) 12 49
 SEMICOLON (296) 5 8 28 31 41 42 43 44
-COLON (297) 38 39 40
+COLON (297) 38 40
 THEN (298)
 OP (299) 46
 REL (300)
@@ -194,7 +197,7 @@ parm (59)
 liste_instructions (60)
     à gauche: 22 23, à droite: 22 45
 instruction (61)
-    à gauche: 24 25 26 27 28 30, à droite: 22 31 32 33 34 38 39 40
+    à gauche: 24 25 26 27 28 30, à droite: 22 31 32 33 34 38 40
 $@3 (62)
     à gauche: 29, à droite: 30
 iteration (63)
@@ -202,32 +205,36 @@ iteration (63)
 selection (64)
     à gauche: 33 34 35, à droite: 25
 switch_block (65)
-    à gauche: 36 37 38, à droite: 35
+    à gauche: 36, à droite: 35
 cases (66)
-    à gauche: 39 40, à droite: 37 39
-appel (67)
+    à gauche: 37 38, à droite: 36 38
+default_case (67)
+    à gauche: 39 40, à droite: 36
+appel (68)
     à gauche: 41, à droite: 27
-saut (68)
+saut (69)
     à gauche: 42 43 44, à droite: 26
-bloc (69)
+bloc (70)
     à gauche: 45, à droite: 15 30
-affectation (70)
+affectation (71)
     à gauche: 46, à droite: 28 31
-variable (71)
-    à gauche: 47 48, à droite: 46 48 53
-expression (72)
-    à gauche: 49 50 51 52 53 54, à droite: 35 44 46 48 49 50 51 55
-    56 61
-liste_expressions (73)
-    à gauche: 55 56 57, à droite: 41 54 55
-condition (74)
-    à gauche: 58 59 60 61, à droite: 31 32 33 34 58 59 60
-binary_op (75)
-    à gauche: 62 63 64 65 66 67 68 69, à droite: 50
-binary_rel (76)
-    à gauche: 70 71, à droite: 59
-binary_comp (77)
-    à gauche: 72 73 74 75 76 77, à droite: 61
+variable (72)
+    à gauche: 47, à droite: 46 54
+var (73)
+    à gauche: 48 49, à droite: 47 49
+expression (74)
+    à gauche: 50 51 52 53 54 55, à droite: 35 44 46 49 50 51 52 56
+    57 62
+liste_expressions (75)
+    à gauche: 56 57 58, à droite: 41 55 57
+condition (76)
+    à gauche: 59 60 61 62, à droite: 31 32 33 34 59 60 61
+binary_op (77)
+    à gauche: 63 64 65 66 67 68 69 70, à droite: 51
+binary_rel (78)
+    à gauche: 71 72, à droite: 60
+binary_comp (79)
+    à gauche: 73 74 75 76 77 78, à droite: 62
 
 
 état 0
@@ -619,6 +626,7 @@ binary_comp (77)
     saut                aller à l'état 58
     affectation         aller à l'état 59
     variable            aller à l'état 60
+    var                 aller à l'état 61
 
 
 état 43
@@ -631,25 +639,25 @@ binary_comp (77)
 état 44
 
    41 appel: IDENTIFICATEUR . LPAREN liste_expressions RPAREN SEMICOLON
-   47 variable: IDENTIFICATEUR .
+   48 var: IDENTIFICATEUR .
 
-    LPAREN  décalage et aller à l'état 61
+    LPAREN  décalage et aller à l'état 62
 
-    $défaut  réduction par utilisation de la règle 47 (variable)
+    $défaut  réduction par utilisation de la règle 48 (var)
 
 
 état 45
 
    31 iteration: FOR . LPAREN affectation SEMICOLON condition SEMICOLON affectation RPAREN instruction
 
-    LPAREN  décalage et aller à l'état 62
+    LPAREN  décalage et aller à l'état 63
 
 
 état 46
 
    32 iteration: WHILE . LPAREN condition RPAREN instruction
 
-    LPAREN  décalage et aller à l'état 63
+    LPAREN  décalage et aller à l'état 64
 
 
 état 47
@@ -657,21 +665,21 @@ binary_comp (77)
    33 selection: IF . LPAREN condition RPAREN instruction
    34          | IF . LPAREN condition RPAREN instruction ELSE instruction
 
-    LPAREN  décalage et aller à l'état 64
+    LPAREN  décalage et aller à l'état 65
 
 
 état 48
 
    35 selection: SWITCH . LPAREN expression RPAREN LBRACE switch_block RBRACE
 
-    LPAREN  décalage et aller à l'état 65
+    LPAREN  décalage et aller à l'état 66
 
 
 état 49
 
    42 saut: BREAK . SEMICOLON
 
-    SEMICOLON  décalage et aller à l'état 66
+    SEMICOLON  décalage et aller à l'état 67
 
 
 état 50
@@ -679,14 +687,15 @@ binary_comp (77)
    43 saut: RETURN . SEMICOLON
    44     | RETURN . expression SEMICOLON
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
-    SEMICOLON       décalage et aller à l'état 71
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
+    SEMICOLON       décalage et aller à l'état 72
 
-    variable    aller à l'état 72
-    expression  aller à l'état 73
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 74
 
 
 état 51
@@ -703,7 +712,7 @@ binary_comp (77)
 
    45 bloc: LBRACE liste_declarations liste_instructions . RBRACE
 
-    RBRACE  décalage et aller à l'état 74
+    RBRACE  décalage et aller à l'état 75
 
 
 état 53
@@ -721,7 +730,7 @@ binary_comp (77)
     LBRACE   réduction par utilisation de la règle 29 ($@3)
     $défaut  réduction par utilisation de la règle 23 (liste_instructions)
 
-    liste_instructions  aller à l'état 75
+    liste_instructions  aller à l'état 76
     instruction         aller à l'état 53
     $@3                 aller à l'état 54
     iteration           aller à l'état 55
@@ -730,6 +739,7 @@ binary_comp (77)
     saut                aller à l'état 58
     affectation         aller à l'état 59
     variable            aller à l'état 60
+    var                 aller à l'état 61
 
 
 état 54
@@ -738,7 +748,7 @@ binary_comp (77)
 
     LBRACE  décalage et aller à l'état 39
 
-    bloc  aller à l'état 76
+    bloc  aller à l'état 77
 
 
 état 55
@@ -773,681 +783,702 @@ binary_comp (77)
 
    28 instruction: affectation . SEMICOLON
 
-    SEMICOLON  décalage et aller à l'état 77
+    SEMICOLON  décalage et aller à l'état 78
 
 
 état 60
 
    46 affectation: variable . OP expression
-   48 variable: variable . LBRACKET expression RBRACKET
 
-    LBRACKET  décalage et aller à l'état 78
-    OP        décalage et aller à l'état 79
+    OP  décalage et aller à l'état 79
 
 
 état 61
 
-   41 appel: IDENTIFICATEUR LPAREN . liste_expressions RPAREN SEMICOLON
+   47 variable: var .
+   49 var: var . LBRACKET expression RBRACKET
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
+    LBRACKET  décalage et aller à l'état 80
 
-    $défaut  réduction par utilisation de la règle 57 (liste_expressions)
-
-    variable           aller à l'état 72
-    expression         aller à l'état 80
-    liste_expressions  aller à l'état 81
+    $défaut  réduction par utilisation de la règle 47 (variable)
 
 
 état 62
 
-   31 iteration: FOR LPAREN . affectation SEMICOLON condition SEMICOLON affectation RPAREN instruction
+   41 appel: IDENTIFICATEUR LPAREN . liste_expressions RPAREN SEMICOLON
 
-    IDENTIFICATEUR  décalage et aller à l'état 82
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    affectation  aller à l'état 83
-    variable     aller à l'état 60
+    $défaut  réduction par utilisation de la règle 58 (liste_expressions)
+
+    variable           aller à l'état 73
+    var                aller à l'état 61
+    expression         aller à l'état 81
+    liste_expressions  aller à l'état 82
 
 
 état 63
 
-   32 iteration: WHILE LPAREN . condition RPAREN instruction
+   31 iteration: FOR LPAREN . affectation SEMICOLON condition SEMICOLON affectation RPAREN instruction
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    NOT             décalage et aller à l'état 84
-    LPAREN          décalage et aller à l'état 85
+    IDENTIFICATEUR  décalage et aller à l'état 83
 
-    variable    aller à l'état 72
-    expression  aller à l'état 86
-    condition   aller à l'état 87
+    affectation  aller à l'état 84
+    variable     aller à l'état 60
+    var          aller à l'état 61
 
 
 état 64
 
-   33 selection: IF LPAREN . condition RPAREN instruction
-   34          | IF LPAREN . condition RPAREN instruction ELSE instruction
+   32 iteration: WHILE LPAREN . condition RPAREN instruction
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    NOT             décalage et aller à l'état 84
-    LPAREN          décalage et aller à l'état 85
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    NOT             décalage et aller à l'état 85
+    LPAREN          décalage et aller à l'état 86
 
-    variable    aller à l'état 72
-    expression  aller à l'état 86
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 87
     condition   aller à l'état 88
 
 
 état 65
 
-   35 selection: SWITCH LPAREN . expression RPAREN LBRACE switch_block RBRACE
+   33 selection: IF LPAREN . condition RPAREN instruction
+   34          | IF LPAREN . condition RPAREN instruction ELSE instruction
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    NOT             décalage et aller à l'état 85
+    LPAREN          décalage et aller à l'état 86
 
-    variable    aller à l'état 72
-    expression  aller à l'état 89
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 87
+    condition   aller à l'état 89
 
 
 état 66
+
+   35 selection: SWITCH LPAREN . expression RPAREN LBRACE switch_block RBRACE
+
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
+
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 90
+
+
+état 67
 
    42 saut: BREAK SEMICOLON .
 
     $défaut  réduction par utilisation de la règle 42 (saut)
 
 
-état 67
-
-   47 variable: IDENTIFICATEUR .
-   54 expression: IDENTIFICATEUR . LPAREN liste_expressions RPAREN
-
-    LPAREN  décalage et aller à l'état 90
-
-    $défaut  réduction par utilisation de la règle 47 (variable)
-
-
 état 68
 
-   52 expression: CONSTANTE .
+   48 var: IDENTIFICATEUR .
+   55 expression: IDENTIFICATEUR . LPAREN liste_expressions RPAREN
 
-    $défaut  réduction par utilisation de la règle 52 (expression)
+    LPAREN  décalage et aller à l'état 91
+
+    $défaut  réduction par utilisation de la règle 48 (var)
 
 
 état 69
 
-   51 expression: MOINS . expression
+   53 expression: CONSTANTE .
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
-
-    variable    aller à l'état 72
-    expression  aller à l'état 91
+    $défaut  réduction par utilisation de la règle 53 (expression)
 
 
 état 70
 
-   49 expression: LPAREN . expression RPAREN
+   52 expression: MOINS . expression
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    variable    aller à l'état 72
+    variable    aller à l'état 73
+    var         aller à l'état 61
     expression  aller à l'état 92
 
 
 état 71
+
+   50 expression: LPAREN . expression RPAREN
+
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
+
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 93
+
+
+état 72
 
    43 saut: RETURN SEMICOLON .
 
     $défaut  réduction par utilisation de la règle 43 (saut)
 
 
-état 72
-
-   48 variable: variable . LBRACKET expression RBRACKET
-   53 expression: variable .
-
-    LBRACKET  décalage et aller à l'état 78
-
-    $défaut  réduction par utilisation de la règle 53 (expression)
-
-
 état 73
 
-   44 saut: RETURN expression . SEMICOLON
-   50 expression: expression . binary_op expression
+   54 expression: variable .
 
-    PLUS       décalage et aller à l'état 93
-    MOINS      décalage et aller à l'état 94
-    MUL        décalage et aller à l'état 95
-    DIV        décalage et aller à l'état 96
-    LSHIFT     décalage et aller à l'état 97
-    RSHIFT     décalage et aller à l'état 98
-    BAND       décalage et aller à l'état 99
-    BOR        décalage et aller à l'état 100
-    SEMICOLON  décalage et aller à l'état 101
-
-    binary_op  aller à l'état 102
+    $défaut  réduction par utilisation de la règle 54 (expression)
 
 
 état 74
+
+   44 saut: RETURN expression . SEMICOLON
+   51 expression: expression . binary_op expression
+
+    PLUS       décalage et aller à l'état 94
+    MOINS      décalage et aller à l'état 95
+    MUL        décalage et aller à l'état 96
+    DIV        décalage et aller à l'état 97
+    LSHIFT     décalage et aller à l'état 98
+    RSHIFT     décalage et aller à l'état 99
+    BAND       décalage et aller à l'état 100
+    BOR        décalage et aller à l'état 101
+    SEMICOLON  décalage et aller à l'état 102
+
+    binary_op  aller à l'état 103
+
+
+état 75
 
    45 bloc: LBRACE liste_declarations liste_instructions RBRACE .
 
     $défaut  réduction par utilisation de la règle 45 (bloc)
 
 
-état 75
+état 76
 
    22 liste_instructions: instruction liste_instructions .
 
     $défaut  réduction par utilisation de la règle 22 (liste_instructions)
 
 
-état 76
+état 77
 
    30 instruction: $@3 bloc .
 
     $défaut  réduction par utilisation de la règle 30 (instruction)
 
 
-état 77
+état 78
 
    28 instruction: affectation SEMICOLON .
 
     $défaut  réduction par utilisation de la règle 28 (instruction)
 
 
-état 78
-
-   48 variable: variable LBRACKET . expression RBRACKET
-
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
-
-    variable    aller à l'état 72
-    expression  aller à l'état 103
-
-
 état 79
 
    46 affectation: variable OP . expression
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    variable    aller à l'état 72
+    variable    aller à l'état 73
+    var         aller à l'état 61
     expression  aller à l'état 104
 
 
 état 80
 
-   50 expression: expression . binary_op expression
-   56 liste_expressions: expression .
+   49 var: var LBRACKET . expression RBRACKET
 
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    $défaut  réduction par utilisation de la règle 56 (liste_expressions)
-
-    binary_op  aller à l'état 102
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 105
 
 
 état 81
 
-   41 appel: IDENTIFICATEUR LPAREN liste_expressions . RPAREN SEMICOLON
-   55 liste_expressions: liste_expressions . COMMA expression
+   51 expression: expression . binary_op expression
+   56 liste_expressions: expression .
 
-    RPAREN  décalage et aller à l'état 105
-    COMMA   décalage et aller à l'état 106
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
+
+    $défaut  réduction par utilisation de la règle 56 (liste_expressions)
+
+    binary_op  aller à l'état 103
 
 
 état 82
 
-   47 variable: IDENTIFICATEUR .
+   41 appel: IDENTIFICATEUR LPAREN liste_expressions . RPAREN SEMICOLON
+   57 liste_expressions: liste_expressions . COMMA expression
 
-    $défaut  réduction par utilisation de la règle 47 (variable)
+    RPAREN  décalage et aller à l'état 106
+    COMMA   décalage et aller à l'état 107
 
 
 état 83
 
-   31 iteration: FOR LPAREN affectation . SEMICOLON condition SEMICOLON affectation RPAREN instruction
+   48 var: IDENTIFICATEUR .
 
-    SEMICOLON  décalage et aller à l'état 107
+    $défaut  réduction par utilisation de la règle 48 (var)
 
 
 état 84
 
-   58 condition: NOT . LPAREN condition RPAREN
+   31 iteration: FOR LPAREN affectation . SEMICOLON condition SEMICOLON affectation RPAREN instruction
 
-    LPAREN  décalage et aller à l'état 108
+    SEMICOLON  décalage et aller à l'état 108
 
 
 état 85
 
-   49 expression: LPAREN . expression RPAREN
-   60 condition: LPAREN . condition RPAREN
+   59 condition: NOT . LPAREN condition RPAREN
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    NOT             décalage et aller à l'état 84
-    LPAREN          décalage et aller à l'état 85
-
-    variable    aller à l'état 72
-    expression  aller à l'état 109
-    condition   aller à l'état 110
+    LPAREN  décalage et aller à l'état 109
 
 
 état 86
 
-   50 expression: expression . binary_op expression
-   61 condition: expression . binary_comp expression
+   50 expression: LPAREN . expression RPAREN
+   61 condition: LPAREN . condition RPAREN
 
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
-    LT      décalage et aller à l'état 111
-    GT      décalage et aller à l'état 112
-    GEQ     décalage et aller à l'état 113
-    LEQ     décalage et aller à l'état 114
-    EQ      décalage et aller à l'état 115
-    NEQ     décalage et aller à l'état 116
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    NOT             décalage et aller à l'état 85
+    LPAREN          décalage et aller à l'état 86
 
-    binary_op    aller à l'état 102
-    binary_comp  aller à l'état 117
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 110
+    condition   aller à l'état 111
 
 
 état 87
 
-   32 iteration: WHILE LPAREN condition . RPAREN instruction
-   59 condition: condition . binary_rel condition
+   51 expression: expression . binary_op expression
+   62 condition: expression . binary_comp expression
 
-    LAND    décalage et aller à l'état 118
-    LOR     décalage et aller à l'état 119
-    RPAREN  décalage et aller à l'état 120
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
+    LT      décalage et aller à l'état 112
+    GT      décalage et aller à l'état 113
+    GEQ     décalage et aller à l'état 114
+    LEQ     décalage et aller à l'état 115
+    EQ      décalage et aller à l'état 116
+    NEQ     décalage et aller à l'état 117
 
-    binary_rel  aller à l'état 121
+    binary_op    aller à l'état 103
+    binary_comp  aller à l'état 118
 
 
 état 88
 
-   33 selection: IF LPAREN condition . RPAREN instruction
-   34          | IF LPAREN condition . RPAREN instruction ELSE instruction
-   59 condition: condition . binary_rel condition
+   32 iteration: WHILE LPAREN condition . RPAREN instruction
+   60 condition: condition . binary_rel condition
 
-    LAND    décalage et aller à l'état 118
-    LOR     décalage et aller à l'état 119
-    RPAREN  décalage et aller à l'état 122
+    LAND    décalage et aller à l'état 119
+    LOR     décalage et aller à l'état 120
+    RPAREN  décalage et aller à l'état 121
 
-    binary_rel  aller à l'état 121
+    binary_rel  aller à l'état 122
 
 
 état 89
 
-   35 selection: SWITCH LPAREN expression . RPAREN LBRACE switch_block RBRACE
-   50 expression: expression . binary_op expression
+   33 selection: IF LPAREN condition . RPAREN instruction
+   34          | IF LPAREN condition . RPAREN instruction ELSE instruction
+   60 condition: condition . binary_rel condition
 
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
+    LAND    décalage et aller à l'état 119
+    LOR     décalage et aller à l'état 120
     RPAREN  décalage et aller à l'état 123
 
-    binary_op  aller à l'état 102
+    binary_rel  aller à l'état 122
 
 
 état 90
 
-   54 expression: IDENTIFICATEUR LPAREN . liste_expressions RPAREN
+   35 selection: SWITCH LPAREN expression . RPAREN LBRACE switch_block RBRACE
+   51 expression: expression . binary_op expression
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
+    RPAREN  décalage et aller à l'état 124
 
-    $défaut  réduction par utilisation de la règle 57 (liste_expressions)
-
-    variable           aller à l'état 72
-    expression         aller à l'état 80
-    liste_expressions  aller à l'état 124
+    binary_op  aller à l'état 103
 
 
 état 91
 
-   50 expression: expression . binary_op expression
-   51           | MOINS expression .
+   55 expression: IDENTIFICATEUR LPAREN . liste_expressions RPAREN
 
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    $défaut  réduction par utilisation de la règle 51 (expression)
+    $défaut  réduction par utilisation de la règle 58 (liste_expressions)
 
-    binary_op  aller à l'état 102
+    variable           aller à l'état 73
+    var                aller à l'état 61
+    expression         aller à l'état 81
+    liste_expressions  aller à l'état 125
 
 
 état 92
 
-   49 expression: LPAREN expression . RPAREN
-   50           | expression . binary_op expression
+   51 expression: expression . binary_op expression
+   52           | MOINS expression .
 
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
-    RPAREN  décalage et aller à l'état 125
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
 
-    binary_op  aller à l'état 102
+    $défaut  réduction par utilisation de la règle 52 (expression)
+
+    binary_op  aller à l'état 103
 
 
 état 93
 
-   62 binary_op: PLUS .
+   50 expression: LPAREN expression . RPAREN
+   51           | expression . binary_op expression
 
-    $défaut  réduction par utilisation de la règle 62 (binary_op)
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
+    RPAREN  décalage et aller à l'état 126
+
+    binary_op  aller à l'état 103
 
 
 état 94
 
-   63 binary_op: MOINS .
+   63 binary_op: PLUS .
 
     $défaut  réduction par utilisation de la règle 63 (binary_op)
 
 
 état 95
 
-   64 binary_op: MUL .
+   64 binary_op: MOINS .
 
     $défaut  réduction par utilisation de la règle 64 (binary_op)
 
 
 état 96
 
-   65 binary_op: DIV .
+   65 binary_op: MUL .
 
     $défaut  réduction par utilisation de la règle 65 (binary_op)
 
 
 état 97
 
-   66 binary_op: LSHIFT .
+   66 binary_op: DIV .
 
     $défaut  réduction par utilisation de la règle 66 (binary_op)
 
 
 état 98
 
-   67 binary_op: RSHIFT .
+   67 binary_op: LSHIFT .
 
     $défaut  réduction par utilisation de la règle 67 (binary_op)
 
 
 état 99
 
-   68 binary_op: BAND .
+   68 binary_op: RSHIFT .
 
     $défaut  réduction par utilisation de la règle 68 (binary_op)
 
 
 état 100
 
-   69 binary_op: BOR .
+   69 binary_op: BAND .
 
     $défaut  réduction par utilisation de la règle 69 (binary_op)
 
 
 état 101
 
+   70 binary_op: BOR .
+
+    $défaut  réduction par utilisation de la règle 70 (binary_op)
+
+
+état 102
+
    44 saut: RETURN expression SEMICOLON .
 
     $défaut  réduction par utilisation de la règle 44 (saut)
 
 
-état 102
-
-   50 expression: expression binary_op . expression
-
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
-
-    variable    aller à l'état 72
-    expression  aller à l'état 126
-
-
 état 103
 
-   48 variable: variable LBRACKET expression . RBRACKET
-   50 expression: expression . binary_op expression
+   51 expression: expression binary_op . expression
 
-    PLUS      décalage et aller à l'état 93
-    MOINS     décalage et aller à l'état 94
-    MUL       décalage et aller à l'état 95
-    DIV       décalage et aller à l'état 96
-    LSHIFT    décalage et aller à l'état 97
-    RSHIFT    décalage et aller à l'état 98
-    BAND      décalage et aller à l'état 99
-    BOR       décalage et aller à l'état 100
-    RBRACKET  décalage et aller à l'état 127
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    binary_op  aller à l'état 102
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 127
 
 
 état 104
 
    46 affectation: variable OP expression .
-   50 expression: expression . binary_op expression
+   51 expression: expression . binary_op expression
 
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
 
     $défaut  réduction par utilisation de la règle 46 (affectation)
 
-    binary_op  aller à l'état 102
+    binary_op  aller à l'état 103
 
 
 état 105
 
-   41 appel: IDENTIFICATEUR LPAREN liste_expressions RPAREN . SEMICOLON
+   49 var: var LBRACKET expression . RBRACKET
+   51 expression: expression . binary_op expression
 
-    SEMICOLON  décalage et aller à l'état 128
+    PLUS      décalage et aller à l'état 94
+    MOINS     décalage et aller à l'état 95
+    MUL       décalage et aller à l'état 96
+    DIV       décalage et aller à l'état 97
+    LSHIFT    décalage et aller à l'état 98
+    RSHIFT    décalage et aller à l'état 99
+    BAND      décalage et aller à l'état 100
+    BOR       décalage et aller à l'état 101
+    RBRACKET  décalage et aller à l'état 128
+
+    binary_op  aller à l'état 103
 
 
 état 106
 
-   55 liste_expressions: liste_expressions COMMA . expression
+   41 appel: IDENTIFICATEUR LPAREN liste_expressions RPAREN . SEMICOLON
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
-
-    variable    aller à l'état 72
-    expression  aller à l'état 129
+    SEMICOLON  décalage et aller à l'état 129
 
 
 état 107
 
-   31 iteration: FOR LPAREN affectation SEMICOLON . condition SEMICOLON affectation RPAREN instruction
+   57 liste_expressions: liste_expressions COMMA . expression
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    NOT             décalage et aller à l'état 84
-    LPAREN          décalage et aller à l'état 85
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
 
-    variable    aller à l'état 72
-    expression  aller à l'état 86
-    condition   aller à l'état 130
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 130
 
 
 état 108
 
-   58 condition: NOT LPAREN . condition RPAREN
+   31 iteration: FOR LPAREN affectation SEMICOLON . condition SEMICOLON affectation RPAREN instruction
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    NOT             décalage et aller à l'état 84
-    LPAREN          décalage et aller à l'état 85
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    NOT             décalage et aller à l'état 85
+    LPAREN          décalage et aller à l'état 86
 
-    variable    aller à l'état 72
-    expression  aller à l'état 86
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 87
     condition   aller à l'état 131
 
 
 état 109
 
-   49 expression: LPAREN expression . RPAREN
-   50           | expression . binary_op expression
-   61 condition: expression . binary_comp expression
+   59 condition: NOT LPAREN . condition RPAREN
 
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
-    LT      décalage et aller à l'état 111
-    GT      décalage et aller à l'état 112
-    GEQ     décalage et aller à l'état 113
-    LEQ     décalage et aller à l'état 114
-    EQ      décalage et aller à l'état 115
-    NEQ     décalage et aller à l'état 116
-    RPAREN  décalage et aller à l'état 125
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    NOT             décalage et aller à l'état 85
+    LPAREN          décalage et aller à l'état 86
 
-    binary_op    aller à l'état 102
-    binary_comp  aller à l'état 117
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 87
+    condition   aller à l'état 132
 
 
 état 110
 
-   59 condition: condition . binary_rel condition
-   60          | LPAREN condition . RPAREN
+   50 expression: LPAREN expression . RPAREN
+   51           | expression . binary_op expression
+   62 condition: expression . binary_comp expression
 
-    LAND    décalage et aller à l'état 118
-    LOR     décalage et aller à l'état 119
-    RPAREN  décalage et aller à l'état 132
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
+    LT      décalage et aller à l'état 112
+    GT      décalage et aller à l'état 113
+    GEQ     décalage et aller à l'état 114
+    LEQ     décalage et aller à l'état 115
+    EQ      décalage et aller à l'état 116
+    NEQ     décalage et aller à l'état 117
+    RPAREN  décalage et aller à l'état 126
 
-    binary_rel  aller à l'état 121
+    binary_op    aller à l'état 103
+    binary_comp  aller à l'état 118
 
 
 état 111
 
-   72 binary_comp: LT .
+   60 condition: condition . binary_rel condition
+   61          | LPAREN condition . RPAREN
 
-    $défaut  réduction par utilisation de la règle 72 (binary_comp)
+    LAND    décalage et aller à l'état 119
+    LOR     décalage et aller à l'état 120
+    RPAREN  décalage et aller à l'état 133
+
+    binary_rel  aller à l'état 122
 
 
 état 112
 
-   73 binary_comp: GT .
+   73 binary_comp: LT .
 
     $défaut  réduction par utilisation de la règle 73 (binary_comp)
 
 
 état 113
 
-   74 binary_comp: GEQ .
+   74 binary_comp: GT .
 
     $défaut  réduction par utilisation de la règle 74 (binary_comp)
 
 
 état 114
 
-   75 binary_comp: LEQ .
+   75 binary_comp: GEQ .
 
     $défaut  réduction par utilisation de la règle 75 (binary_comp)
 
 
 état 115
 
-   76 binary_comp: EQ .
+   76 binary_comp: LEQ .
 
     $défaut  réduction par utilisation de la règle 76 (binary_comp)
 
 
 état 116
 
-   77 binary_comp: NEQ .
+   77 binary_comp: EQ .
 
     $défaut  réduction par utilisation de la règle 77 (binary_comp)
 
 
 état 117
 
-   61 condition: expression binary_comp . expression
+   78 binary_comp: NEQ .
 
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    LPAREN          décalage et aller à l'état 70
-
-    variable    aller à l'état 72
-    expression  aller à l'état 133
+    $défaut  réduction par utilisation de la règle 78 (binary_comp)
 
 
 état 118
 
-   70 binary_rel: LAND .
+   62 condition: expression binary_comp . expression
 
-    $défaut  réduction par utilisation de la règle 70 (binary_rel)
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    LPAREN          décalage et aller à l'état 71
+
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 134
 
 
 état 119
 
-   71 binary_rel: LOR .
+   71 binary_rel: LAND .
 
     $défaut  réduction par utilisation de la règle 71 (binary_rel)
 
 
 état 120
+
+   72 binary_rel: LOR .
+
+    $défaut  réduction par utilisation de la règle 72 (binary_rel)
+
+
+état 121
 
    32 iteration: WHILE LPAREN condition RPAREN . instruction
 
@@ -1461,7 +1492,7 @@ binary_comp (77)
 
     $défaut  réduction par utilisation de la règle 29 ($@3)
 
-    instruction  aller à l'état 134
+    instruction  aller à l'état 135
     $@3          aller à l'état 54
     iteration    aller à l'état 55
     selection    aller à l'état 56
@@ -1469,24 +1500,26 @@ binary_comp (77)
     saut         aller à l'état 58
     affectation  aller à l'état 59
     variable     aller à l'état 60
-
-
-état 121
-
-   59 condition: condition binary_rel . condition
-
-    IDENTIFICATEUR  décalage et aller à l'état 67
-    CONSTANTE       décalage et aller à l'état 68
-    MOINS           décalage et aller à l'état 69
-    NOT             décalage et aller à l'état 84
-    LPAREN          décalage et aller à l'état 85
-
-    variable    aller à l'état 72
-    expression  aller à l'état 86
-    condition   aller à l'état 135
+    var          aller à l'état 61
 
 
 état 122
+
+   60 condition: condition binary_rel . condition
+
+    IDENTIFICATEUR  décalage et aller à l'état 68
+    CONSTANTE       décalage et aller à l'état 69
+    MOINS           décalage et aller à l'état 70
+    NOT             décalage et aller à l'état 85
+    LPAREN          décalage et aller à l'état 86
+
+    variable    aller à l'état 73
+    var         aller à l'état 61
+    expression  aller à l'état 87
+    condition   aller à l'état 136
+
+
+état 123
 
    33 selection: IF LPAREN condition RPAREN . instruction
    34          | IF LPAREN condition RPAREN . instruction ELSE instruction
@@ -1501,7 +1534,7 @@ binary_comp (77)
 
     $défaut  réduction par utilisation de la règle 29 ($@3)
 
-    instruction  aller à l'état 136
+    instruction  aller à l'état 137
     $@3          aller à l'état 54
     iteration    aller à l'état 55
     selection    aller à l'état 56
@@ -1509,189 +1542,188 @@ binary_comp (77)
     saut         aller à l'état 58
     affectation  aller à l'état 59
     variable     aller à l'état 60
-
-
-état 123
-
-   35 selection: SWITCH LPAREN expression RPAREN . LBRACE switch_block RBRACE
-
-    LBRACE  décalage et aller à l'état 137
+    var          aller à l'état 61
 
 
 état 124
 
-   54 expression: IDENTIFICATEUR LPAREN liste_expressions . RPAREN
-   55 liste_expressions: liste_expressions . COMMA expression
+   35 selection: SWITCH LPAREN expression RPAREN . LBRACE switch_block RBRACE
 
-    RPAREN  décalage et aller à l'état 138
-    COMMA   décalage et aller à l'état 106
+    LBRACE  décalage et aller à l'état 138
 
 
 état 125
 
-   49 expression: LPAREN expression RPAREN .
+   55 expression: IDENTIFICATEUR LPAREN liste_expressions . RPAREN
+   57 liste_expressions: liste_expressions . COMMA expression
 
-    $défaut  réduction par utilisation de la règle 49 (expression)
+    RPAREN  décalage et aller à l'état 139
+    COMMA   décalage et aller à l'état 107
 
 
 état 126
 
-   50 expression: expression . binary_op expression
-   50           | expression binary_op expression .
+   50 expression: LPAREN expression RPAREN .
 
     $défaut  réduction par utilisation de la règle 50 (expression)
-
-    binary_op  aller à l'état 102
 
 
 état 127
 
-   48 variable: variable LBRACKET expression RBRACKET .
+   51 expression: expression . binary_op expression
+   51           | expression binary_op expression .
 
-    $défaut  réduction par utilisation de la règle 48 (variable)
+    $défaut  réduction par utilisation de la règle 51 (expression)
+
+    binary_op  aller à l'état 103
 
 
 état 128
+
+   49 var: var LBRACKET expression RBRACKET .
+
+    $défaut  réduction par utilisation de la règle 49 (var)
+
+
+état 129
 
    41 appel: IDENTIFICATEUR LPAREN liste_expressions RPAREN SEMICOLON .
 
     $défaut  réduction par utilisation de la règle 41 (appel)
 
 
-état 129
-
-   50 expression: expression . binary_op expression
-   55 liste_expressions: liste_expressions COMMA expression .
-
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
-
-    $défaut  réduction par utilisation de la règle 55 (liste_expressions)
-
-    binary_op  aller à l'état 102
-
-
 état 130
 
-   31 iteration: FOR LPAREN affectation SEMICOLON condition . SEMICOLON affectation RPAREN instruction
-   59 condition: condition . binary_rel condition
+   51 expression: expression . binary_op expression
+   57 liste_expressions: liste_expressions COMMA expression .
 
-    LAND       décalage et aller à l'état 118
-    LOR        décalage et aller à l'état 119
-    SEMICOLON  décalage et aller à l'état 139
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
 
-    binary_rel  aller à l'état 121
+    $défaut  réduction par utilisation de la règle 57 (liste_expressions)
+
+    binary_op  aller à l'état 103
 
 
 état 131
 
-   58 condition: NOT LPAREN condition . RPAREN
-   59          | condition . binary_rel condition
+   31 iteration: FOR LPAREN affectation SEMICOLON condition . SEMICOLON affectation RPAREN instruction
+   60 condition: condition . binary_rel condition
 
-    LAND    décalage et aller à l'état 118
-    LOR     décalage et aller à l'état 119
-    RPAREN  décalage et aller à l'état 140
+    LAND       décalage et aller à l'état 119
+    LOR        décalage et aller à l'état 120
+    SEMICOLON  décalage et aller à l'état 140
 
-    binary_rel  aller à l'état 121
+    binary_rel  aller à l'état 122
 
 
 état 132
 
-   60 condition: LPAREN condition RPAREN .
+   59 condition: NOT LPAREN condition . RPAREN
+   60          | condition . binary_rel condition
 
-    $défaut  réduction par utilisation de la règle 60 (condition)
+    LAND    décalage et aller à l'état 119
+    LOR     décalage et aller à l'état 120
+    RPAREN  décalage et aller à l'état 141
+
+    binary_rel  aller à l'état 122
 
 
 état 133
 
-   50 expression: expression . binary_op expression
-   61 condition: expression binary_comp expression .
-
-    PLUS    décalage et aller à l'état 93
-    MOINS   décalage et aller à l'état 94
-    MUL     décalage et aller à l'état 95
-    DIV     décalage et aller à l'état 96
-    LSHIFT  décalage et aller à l'état 97
-    RSHIFT  décalage et aller à l'état 98
-    BAND    décalage et aller à l'état 99
-    BOR     décalage et aller à l'état 100
+   61 condition: LPAREN condition RPAREN .
 
     $défaut  réduction par utilisation de la règle 61 (condition)
 
-    binary_op  aller à l'état 102
-
 
 état 134
+
+   51 expression: expression . binary_op expression
+   62 condition: expression binary_comp expression .
+
+    PLUS    décalage et aller à l'état 94
+    MOINS   décalage et aller à l'état 95
+    MUL     décalage et aller à l'état 96
+    DIV     décalage et aller à l'état 97
+    LSHIFT  décalage et aller à l'état 98
+    RSHIFT  décalage et aller à l'état 99
+    BAND    décalage et aller à l'état 100
+    BOR     décalage et aller à l'état 101
+
+    $défaut  réduction par utilisation de la règle 62 (condition)
+
+    binary_op  aller à l'état 103
+
+
+état 135
 
    32 iteration: WHILE LPAREN condition RPAREN instruction .
 
     $défaut  réduction par utilisation de la règle 32 (iteration)
 
 
-état 135
-
-   59 condition: condition . binary_rel condition
-   59          | condition binary_rel condition .
-
-    $défaut  réduction par utilisation de la règle 59 (condition)
-
-    binary_rel  aller à l'état 121
-
-
 état 136
 
-   33 selection: IF LPAREN condition RPAREN instruction .
-   34          | IF LPAREN condition RPAREN instruction . ELSE instruction
+   60 condition: condition . binary_rel condition
+   60          | condition binary_rel condition .
 
-    ELSE  décalage et aller à l'état 141
+    $défaut  réduction par utilisation de la règle 60 (condition)
 
-    $défaut  réduction par utilisation de la règle 33 (selection)
+    binary_rel  aller à l'état 122
 
 
 état 137
 
-   35 selection: SWITCH LPAREN expression RPAREN LBRACE . switch_block RBRACE
+   33 selection: IF LPAREN condition RPAREN instruction .
+   34          | IF LPAREN condition RPAREN instruction . ELSE instruction
 
-    CASE     décalage et aller à l'état 142
-    DEFAULT  décalage et aller à l'état 143
+    ELSE  décalage et aller à l'état 142
 
-    $défaut  réduction par utilisation de la règle 36 (switch_block)
-
-    switch_block  aller à l'état 144
-    cases         aller à l'état 145
+    $défaut  réduction par utilisation de la règle 33 (selection)
 
 
 état 138
 
-   54 expression: IDENTIFICATEUR LPAREN liste_expressions RPAREN .
+   35 selection: SWITCH LPAREN expression RPAREN LBRACE . switch_block RBRACE
 
-    $défaut  réduction par utilisation de la règle 54 (expression)
+    $défaut  réduction par utilisation de la règle 37 (cases)
+
+    switch_block  aller à l'état 143
+    cases         aller à l'état 144
 
 
 état 139
 
-   31 iteration: FOR LPAREN affectation SEMICOLON condition SEMICOLON . affectation RPAREN instruction
+   55 expression: IDENTIFICATEUR LPAREN liste_expressions RPAREN .
 
-    IDENTIFICATEUR  décalage et aller à l'état 82
-
-    affectation  aller à l'état 146
-    variable     aller à l'état 60
+    $défaut  réduction par utilisation de la règle 55 (expression)
 
 
 état 140
 
-   58 condition: NOT LPAREN condition RPAREN .
+   31 iteration: FOR LPAREN affectation SEMICOLON condition SEMICOLON . affectation RPAREN instruction
 
-    $défaut  réduction par utilisation de la règle 58 (condition)
+    IDENTIFICATEUR  décalage et aller à l'état 83
+
+    affectation  aller à l'état 145
+    variable     aller à l'état 60
+    var          aller à l'état 61
 
 
 état 141
+
+   59 condition: NOT LPAREN condition RPAREN .
+
+    $défaut  réduction par utilisation de la règle 59 (condition)
+
+
+état 142
 
    34 selection: IF LPAREN condition RPAREN instruction ELSE . instruction
 
@@ -1705,7 +1737,7 @@ binary_comp (77)
 
     $défaut  réduction par utilisation de la règle 29 ($@3)
 
-    instruction  aller à l'état 147
+    instruction  aller à l'état 146
     $@3          aller à l'état 54
     iteration    aller à l'état 55
     selection    aller à l'état 56
@@ -1713,88 +1745,69 @@ binary_comp (77)
     saut         aller à l'état 58
     affectation  aller à l'état 59
     variable     aller à l'état 60
-
-
-état 142
-
-   39 cases: CASE . CONSTANTE COLON instruction cases
-   40      | CASE . CONSTANTE COLON instruction
-
-    CONSTANTE  décalage et aller à l'état 148
+    var          aller à l'état 61
 
 
 état 143
 
-   38 switch_block: DEFAULT . COLON instruction
+   35 selection: SWITCH LPAREN expression RPAREN LBRACE switch_block . RBRACE
 
-    COLON  décalage et aller à l'état 149
+    RBRACE  décalage et aller à l'état 147
 
 
 état 144
 
-   35 selection: SWITCH LPAREN expression RPAREN LBRACE switch_block . RBRACE
+   36 switch_block: cases . default_case
+   38 cases: cases . CASE CONSTANTE COLON instruction
 
-    RBRACE  décalage et aller à l'état 150
+    CASE     décalage et aller à l'état 148
+    DEFAULT  décalage et aller à l'état 149
+
+    $défaut  réduction par utilisation de la règle 39 (default_case)
+
+    default_case  aller à l'état 150
 
 
 état 145
-
-   37 switch_block: cases .
-
-    $défaut  réduction par utilisation de la règle 37 (switch_block)
-
-
-état 146
 
    31 iteration: FOR LPAREN affectation SEMICOLON condition SEMICOLON affectation . RPAREN instruction
 
     RPAREN  décalage et aller à l'état 151
 
 
-état 147
+état 146
 
    34 selection: IF LPAREN condition RPAREN instruction ELSE instruction .
 
     $défaut  réduction par utilisation de la règle 34 (selection)
 
 
-état 148
-
-   39 cases: CASE CONSTANTE . COLON instruction cases
-   40      | CASE CONSTANTE . COLON instruction
-
-    COLON  décalage et aller à l'état 152
-
-
-état 149
-
-   38 switch_block: DEFAULT COLON . instruction
-
-    IDENTIFICATEUR  décalage et aller à l'état 44
-    FOR             décalage et aller à l'état 45
-    WHILE           décalage et aller à l'état 46
-    IF              décalage et aller à l'état 47
-    SWITCH          décalage et aller à l'état 48
-    BREAK           décalage et aller à l'état 49
-    RETURN          décalage et aller à l'état 50
-
-    $défaut  réduction par utilisation de la règle 29 ($@3)
-
-    instruction  aller à l'état 153
-    $@3          aller à l'état 54
-    iteration    aller à l'état 55
-    selection    aller à l'état 56
-    appel        aller à l'état 57
-    saut         aller à l'état 58
-    affectation  aller à l'état 59
-    variable     aller à l'état 60
-
-
-état 150
+état 147
 
    35 selection: SWITCH LPAREN expression RPAREN LBRACE switch_block RBRACE .
 
     $défaut  réduction par utilisation de la règle 35 (selection)
+
+
+état 148
+
+   38 cases: cases CASE . CONSTANTE COLON instruction
+
+    CONSTANTE  décalage et aller à l'état 152
+
+
+état 149
+
+   40 default_case: DEFAULT . COLON instruction
+
+    COLON  décalage et aller à l'état 153
+
+
+état 150
+
+   36 switch_block: cases default_case .
+
+    $défaut  réduction par utilisation de la règle 36 (switch_block)
 
 
 état 151
@@ -1819,12 +1832,19 @@ binary_comp (77)
     saut         aller à l'état 58
     affectation  aller à l'état 59
     variable     aller à l'état 60
+    var          aller à l'état 61
 
 
 état 152
 
-   39 cases: CASE CONSTANTE COLON . instruction cases
-   40      | CASE CONSTANTE COLON . instruction
+   38 cases: cases CASE CONSTANTE . COLON instruction
+
+    COLON  décalage et aller à l'état 155
+
+
+état 153
+
+   40 default_case: DEFAULT COLON . instruction
 
     IDENTIFICATEUR  décalage et aller à l'état 44
     FOR             décalage et aller à l'état 45
@@ -1836,7 +1856,7 @@ binary_comp (77)
 
     $défaut  réduction par utilisation de la règle 29 ($@3)
 
-    instruction  aller à l'état 155
+    instruction  aller à l'état 156
     $@3          aller à l'état 54
     iteration    aller à l'état 55
     selection    aller à l'état 56
@@ -1844,13 +1864,7 @@ binary_comp (77)
     saut         aller à l'état 58
     affectation  aller à l'état 59
     variable     aller à l'état 60
-
-
-état 153
-
-   38 switch_block: DEFAULT COLON instruction .
-
-    $défaut  réduction par utilisation de la règle 38 (switch_block)
+    var          aller à l'état 61
 
 
 état 154
@@ -1862,18 +1876,38 @@ binary_comp (77)
 
 état 155
 
-   39 cases: CASE CONSTANTE COLON instruction . cases
-   40      | CASE CONSTANTE COLON instruction .
+   38 cases: cases CASE CONSTANTE COLON . instruction
 
-    CASE  décalage et aller à l'état 142
+    IDENTIFICATEUR  décalage et aller à l'état 44
+    FOR             décalage et aller à l'état 45
+    WHILE           décalage et aller à l'état 46
+    IF              décalage et aller à l'état 47
+    SWITCH          décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
 
-    $défaut  réduction par utilisation de la règle 40 (cases)
+    $défaut  réduction par utilisation de la règle 29 ($@3)
 
-    cases  aller à l'état 156
+    instruction  aller à l'état 157
+    $@3          aller à l'état 54
+    iteration    aller à l'état 55
+    selection    aller à l'état 56
+    appel        aller à l'état 57
+    saut         aller à l'état 58
+    affectation  aller à l'état 59
+    variable     aller à l'état 60
+    var          aller à l'état 61
 
 
 état 156
 
-   39 cases: CASE CONSTANTE COLON instruction cases .
+   40 default_case: DEFAULT COLON instruction .
 
-    $défaut  réduction par utilisation de la règle 39 (cases)
+    $défaut  réduction par utilisation de la règle 40 (default_case)
+
+
+état 157
+
+   38 cases: cases CASE CONSTANTE COLON instruction .
+
+    $défaut  réduction par utilisation de la règle 38 (cases)

@@ -1,0 +1,34 @@
+entering now scope-----
+we got to const : 1 
+we got to const : 2 
+we got to const : 3 
+we got to const : 0 
+we got to const : 1 
+we got to const : 2 
+just created new_binop
+(1 + 2)
+reducing the bin op (+) propagated to experession
+we got to const : 2 
+just got the aff 	
+aff (ArrayRef(tab[1][2][3]) = ArrayRef(tab[0][(1 + 2)
+][2]))
+-- reducing instruction list one-by-one , inst number : 0
+reducing now bloc
+Created AST_BLOCK with instructs: 006917A8
+this bloc has 1 instructions`- Block -- 0
+   `- Assign
+      |- ArrayRef
+      |  |- Id: tab
+      |  |- Dim[0]: 1
+      |  |- Dim[1]: 2
+      |  `- Dim[2]: 3
+      `- ArrayRef
+         |- Id: tab
+         |- Dim[0]: 0
+         |- Dim[1]: (1 + 2)
+
+         `- Dim[2]: 2
+exiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+now printing the whole tree 

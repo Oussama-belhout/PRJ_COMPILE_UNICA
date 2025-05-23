@@ -92,24 +92,33 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 15 "miniC.y"
-
+#line 19 "miniC.y"
+ //         x {abr1 / integer i1} y{abr2 / string i2}
 	struct ast_container {
 		struct AST *ast;
-		int someting ;
+		struct InstructEntry *instruct_entry;
+		struct ParamEntry *param_entry;
+		struct DimEntry *dim_entry;
+		int ival;
+		char *sval;
 	}ast_container;
+
 
     int integer;
     char *str;
     struct AST *ast;
     struct AST **ast_list;
 	struct ast_container ast_contain;
+	struct ParamEntry *ParamEntry;
+	struct CaseEntry *CaseEntry ;
+	struct DimEntry *DimEntry;
 	struct InstructEntry *InstructEntry;
 
 
 
+
 /* Line 1676 of yacc.c  */
-#line 113 "miniC.tab.h"
+#line 122 "miniC.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
