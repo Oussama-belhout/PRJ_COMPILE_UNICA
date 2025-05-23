@@ -1,0 +1,23 @@
+entering now scope-----
+we got to const : 0 
+just got the aff 	
+aff (a = 0)
+we got to const : 1 
+just got the aff 	
+aff (b = 1)
+-- reducing instruction list one-by-one , inst number : 0
+-- reducing instruction list one-by-one , inst number : 1
+reducing now bloc
+Created AST_BLOCK with instructs: 00A51688
+this bloc has 2 instructionsexiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+ getting to node Unknown getting to node {
+  aff (a = 0)
+
+  aff (b = 1)
+
+}
+ getting to node aff (a = 0)
+ getting to node a getting to node 0 getting to node aff (b = 1)
+ getting to node b getting to node 1

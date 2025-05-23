@@ -176,7 +176,7 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             break;
         }
         case AST_TAB: {
-            ast_to_dot_rec(f, node->data.AST_TAB.id, my_id, "name"); // Changed "id" to "name" as per example [cite: 293]
+            ast_to_dot_rec(f, node->data.AST_TAB.id, my_id, NULL); // Changed "id" to "name" as per example [cite: 293]
             DimEntry *dim = node->data.AST_TAB.dims;
             int idx = 0;
             while (dim) {
@@ -189,29 +189,17 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
         }
         case AST_SWITCH: {
             ast_to_dot_rec(f, node->data.AST_SWITCH.expr, my_id, NULL); // First child is expression [cite: 207, 309]
-            CaseEntry *c = node->data.AST_SWITCH.cases;
             int idx = 0;
+            CaseEntry *c = node->data.AST_SWITCH.cases;
             while (c) {
-                char label[16];
-                snprintf(label, sizeof(label), "", idx++); // Subsequent children are cases [cite: 207, 309]
-                int case_id = get_next_dot_id();
-                // Cases themselves could be represented as nodes, or their value and body as children of the switch
-                // The current implementation creates a "case" node, which is acceptable if not explicitly forbidden
-                fprintf(f, "  n%d [label=\"case\", shape=box];\n", case_id);
-                fprintf(f, "  n%d -> n%d [label=\"%s\"];\n", my_id, case_id, label);
-                ast_to_dot_rec(f, c->value, case_id, NULL);
-                ast_to_dot_rec(f, c->body, case_id, NULL);
+                ast_to_dot_rec(f, c->body, my_id, NULL); // Directly to block of the case
                 c = c->next;
             }
             if (node->data.AST_SWITCH.default_case) {
-                int def_id = get_next_dot_id();
-                // Last child is default case [cite: 208, 310]
-                fprintf(f, "  n%d [label=\"default\", shape=box];\n", def_id);
-                fprintf(f, "  n%d -> n%d [label=\"\"];\n", my_id, def_id);
-                ast_to_dot_rec(f, node->data.AST_SWITCH.default_case, def_id, NULL);
+                ast_to_dot_rec(f, node->data.AST_SWITCH.default_case, my_id, NULL); // Directly to default block
             }
             break;
-        }
+}
         case AST_FUNC_DEC:
             // For a function declaration, its children would typically be parameters and the function body.
             // Assuming AST_FUNC_DEC stores a list of parameters and a body, similar to AST_FUNC.

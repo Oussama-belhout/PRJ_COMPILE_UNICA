@@ -6,51 +6,43 @@ we got to const : 0
 -- reducing instruction list one-by-one , inst number : 0
 -- reducing instruction list one-by-one , inst number : 1
 reducing now bloc
-Created AST_BLOCK with instructs: 00BE18A8
+Created AST_BLOCK with instructs: 00BE1718
 this bloc has 2 instructionsexiting now scope 1
 exiting now scope 2
 we got to const : 1 
 -- reducing instruction list one-by-one , inst number : 2
 -- reducing instruction list one-by-one , inst number : 3
 reducing now bloc
-Created AST_BLOCK with instructs: 00BE1768
+Created AST_BLOCK with instructs: 00BE1728
 this bloc has 4 instructionsexiting now scope 1
 exiting now scope 2
 we got to const : 2 
 -- reducing instruction list one-by-one , inst number : 4
 -- reducing instruction list one-by-one , inst number : 5
 reducing now bloc
-Created AST_BLOCK with instructs: 00BE16E8
+Created AST_BLOCK with instructs: 00BE1808
 this bloc has 6 instructionsexiting now scope 1
 exiting now scope 2
 we got to const : 3 
 -- reducing instruction list one-by-one , inst number : 6
 reducing now bloc
-Created AST_BLOCK with instructs: 00BE1738
+Created AST_BLOCK with instructs: 00BE1818
 this bloc has 7 instructionsexiting now scope 1
 exiting now scope 2
 we got to const : 4 
--- reducing instruction list one-by-one , inst number : 7
-reducing now bloc
-Created AST_BLOCK with instructs: 00BE1758
-this bloc has 8 instructionsexiting now scope 1
-exiting now scope 2
 we got to const : 1 
+-- reducing instruction list one-by-one , inst number : 7
 -- reducing instruction list one-by-one , inst number : 8
--- reducing instruction list one-by-one , inst number : 9
 reducing now bloc
-Created AST_BLOCK with instructs: 00BE17B8
-this bloc has 10 instructionsexiting now scope 1
+Created AST_BLOCK with instructs: 00BE1788
+this bloc has 9 instructionsexiting now scope 1
 exiting now scope 2
 reduced-exited function-scope main ---------
  getting to node Unknown getting to node {
   aff (i = 3)
 
   switch (i) {
-  case 4: {
-  VLPT(id: printd, type: FUNC_CALL, params: )
-
-}
+  case 4: VLPT(id: printd, type: FUNC_CALL, params: )
 
   case 3: {
   VLPT(id: printd, type: FUNC_CALL, params: )
@@ -82,10 +74,7 @@ reduced-exited function-scope main ---------
 }
  getting to node aff (i = 3)
  getting to node i getting to node 3 getting to node switch (i) {
-  case 4: {
-  VLPT(id: printd, type: FUNC_CALL, params: )
-
-}
+  case 4: VLPT(id: printd, type: FUNC_CALL, params: )
 
   case 3: {
   VLPT(id: printd, type: FUNC_CALL, params: )
@@ -113,29 +102,25 @@ reduced-exited function-scope main ---------
   default: VLPT(id: printd, type: FUNC_CALL, params: )
 
 }
- getting to node i getting to node 4 getting to node {
+ getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : 4 getting to node 4 getting to node {
   VLPT(id: printd, type: FUNC_CALL, params: )
 
 }
  getting to node VLPT(id: printd, type: FUNC_CALL, params: )
-param : 4 getting to node 4 getting to node 3 getting to node {
-  VLPT(id: printd, type: FUNC_CALL, params: )
-
-}
- getting to node VLPT(id: printd, type: FUNC_CALL, params: )
-param : 3 getting to node 3 getting to node 2 getting to node {
+param : 3 getting to node 3 getting to node {
   VLPT(id: printd, type: FUNC_CALL, params: )
 
   break;
 }
  getting to node VLPT(id: printd, type: FUNC_CALL, params: )
-param : 2 getting to node 2 getting to node break; getting to node 1 getting to node {
+param : 2 getting to node 2 getting to node break; getting to node {
   VLPT(id: printd, type: FUNC_CALL, params: )
 
   break;
 }
  getting to node VLPT(id: printd, type: FUNC_CALL, params: )
-param : 1 getting to node 1 getting to node break; getting to node 0 getting to node {
+param : 1 getting to node 1 getting to node break; getting to node {
   VLPT(id: printd, type: FUNC_CALL, params: )
 
   break;

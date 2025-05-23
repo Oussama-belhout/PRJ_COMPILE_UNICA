@@ -1,0 +1,25 @@
+entering now scope-----
+we got to const : 3 
+we got to const : 200 
+just got the aff 	
+aff (ArrayRef(tab[3]) = ArrayRef(tab[200]))
+we got to const : 400 
+we got to const : 0 
+just got the aff 	
+aff (ArrayRef(tab[400]) = ArrayRef(tab[0]))
+-- reducing instruction list one-by-one , inst number : 0
+-- reducing instruction list one-by-one , inst number : 1
+reducing now bloc
+Created AST_BLOCK with instructs: 007604C0
+this bloc has 2 instructionsexiting now scope 1
+exiting now scope 2
+reduced-exited function-scope main ---------
+ getting to node Unknown getting to node {
+  aff (ArrayRef(tab[3]) = ArrayRef(tab[200]))
+
+  aff (ArrayRef(tab[400]) = ArrayRef(tab[0]))
+
+}
+ getting to node aff (ArrayRef(tab[3]) = ArrayRef(tab[200]))
+ getting to node ArrayRef(tab[3]) getting to node tab getting to node 3 getting to node ArrayRef(tab[200]) getting to node tab getting to node 200 getting to node aff (ArrayRef(tab[400]) = ArrayRef(tab[0]))
+ getting to node ArrayRef(tab[400]) getting to node tab getting to node 400 getting to node ArrayRef(tab[0]) getting to node tab getting to node 0
