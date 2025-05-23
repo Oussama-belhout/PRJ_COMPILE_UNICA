@@ -4,7 +4,7 @@ int main() {
   int i;
   i = j ;
   while ( i < 10 ) {
-    int j = 2;
+    int j;
     printd(i);
     i = i+2;
   }

@@ -29,7 +29,10 @@
 		int ival;
 		char *sval;
 	}ast_container;
-
+    struct {
+        struct CaseEntry *cases;
+        struct AST *default_case;
+    } switch_block_info;
 
     int integer;
     char *str;
@@ -45,7 +48,7 @@
 
 }
 
-%type <ast_contain> expression affectation appel fonction saut instruction variable bloc var condition selection default_case switch_block iteration
+%type <ast_contain> expression affectation appel fonction saut instruction variable bloc var condition selection default_case  iteration
 %type <InstructEntry> liste_instructions
 %type <ParamEntry> liste_expressions
 %type <DimEntry> declarateur 
@@ -53,6 +56,7 @@
 %type <CaseEntry> cases
 %type <str> binary_comp binary_rel
 %type <str> binary_op type
+%type <switch_block_info> switch_block
 
 %token <str>IDENTIFICATEUR <integer>CONSTANTE VOID INT FOR WHILE IF ELSE SWITCH CASE DEFAULT
 %token BREAK RETURN <str>PLUS <str>MOINS <str>MUL <str>DIV <str>LSHIFT <str>RSHIFT <str>BAND <str>BOR <str>LAND <str>LOR <str>LT <str>GT  
@@ -179,7 +183,7 @@ fonction:
             AST *func_root = ast_new_func($1, ast_new_id($2), $7.ast);
 
             // Generate the DOT for the function body, with the root as parent
-            ast_to_dot_rec(dotfile, func_root, root_id, NULL);
+            ast_to_dot_rec(dotfile, func_root, -1, NULL);
 
             // Optionally, free func_root if you don't need it elsewhere
             free(func_root);
@@ -270,33 +274,27 @@ selection:
         $$.ast = ast_new_if($3.ast, $5.ast, $7.ast);
     }
     | SWITCH LPAREN expression RPAREN LBRACE switch_block RBRACE {
-        //$$.ast = ast_new_switch($3.ast, $6.ast, $6.ast);
+        $$.ast = ast_new_switch($3.ast, $6.cases, $6.default_case);
     }
 ;
 
 switch_block:
-    cases default_case {/*
-        $$.ast->data.AST_SWITCH.cases = $1;
-        $$.ast->data.AST_SWITCH.default_case = $2.ast;*/
+    cases default_case {
+        $$.cases = $1;
+        $$.default_case = $2.ast;
     }
 ;
 
 cases:
     /* empty */ { $$ = NULL; }
     | cases CASE CONSTANTE COLON instruction {
-        /*CaseEntry *case_entry = malloc(sizeof(CaseEntry));
-        instr_entry->case = $3.ast;
-        instr_entry->next = $1;
-        $$ = case_entry;*/
-
+        $$ = case_entry_new(ast_new_number($3), $5.ast, $1);
     }
 ;
 
 default_case:
     /* empty */ { $$.ast = NULL; }
-    | DEFAULT COLON instruction {
-        //$$.ast = $3.ast;
-    }
+    | DEFAULT COLON instruction { $$.ast = $3.ast; }
 ;
 appel:
 	IDENTIFICATEUR LPAREN liste_expressions RPAREN SEMICOLON {

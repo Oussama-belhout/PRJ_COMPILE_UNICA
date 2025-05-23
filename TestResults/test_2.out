@@ -86,28 +86,11 @@ we got to const : 0
 -- reducing instruction list one-by-one , inst number : 9
 -- reducing instruction list one-by-one , inst number : 10
 reducing now bloc
-Created AST_BLOCK with instructs: 00C7B388
-this bloc has 11 instructions`- Block -- 0
-   |- Assign
-   |  |- Id: i
-   |  `- BinOp [/]
-   |     |- Id: j
-   |     `- Number: 3
-   |- VLPT [id: dinging, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: printd, type: FUNC_CALL]
-   |- VLPT [id: last, type: FUNC_CALL]
-   `- Return
-      `- Number: 0
-exiting now scope 1
+Created AST_BLOCK with instructs: 008DB590
+this bloc has 11 instructionsexiting now scope 1
 exiting now scope 2
 reduced-exited function-scope main ---------
- getting to node {
+ getting to node Unknown getting to node {
   aff (i = (j / 3)
 )
 
@@ -181,4 +164,4 @@ param : (45000 + (j + 0)
  getting to node (45000 + (j + 0)
 )
  getting to node 45000 getting to node (j + 0)
- getting to node j getting to node 0 getting to node return 0; getting to node 0now printing the whole tree 
+ getting to node j getting to node 0 getting to node return 0; getting to node 0

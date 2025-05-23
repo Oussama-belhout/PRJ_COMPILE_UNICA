@@ -22,13 +22,15 @@ void ast_to_dot(FILE *f, AST *root) {
 
 void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
     if (!node) return;
+
+    
     int my_id = get_next_dot_id();
     printf(" getting to node ");ast_print(node);
 
     // Print this node
     switch (node->tag) {
         case AST_NUMBER:
-            fprintf(f, "  n%d [label=\"%d\", shape=ecllipse];\n", my_id, node->data.AST_NUMBER.number);
+            fprintf(f, "  n%d [label=\"%d\", shape=ellipse];\n", my_id, node->data.AST_NUMBER.number);
             break;
         case AST_ID:
             fprintf(f, "  n%d [label=\"%s\", shape=ellipse];\n", my_id, node->data.AST_ID.id);
@@ -74,11 +76,10 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             fprintf(f, "  n%d [label=\"BREAK\", shape=box];\n", my_id);
             break;
         case AST_RETURN:
-            if (node->data.AST_RETURN.expr != NULL)
-            {
+
                 // Changed label to "RETURN" and shape to trapezium and color to blue as per spec [cite: 198, 298]
                 fprintf(f, "  n%d [label=\"RETURN\", shape=trapezium color=blue];\n", my_id);
-            } 
+            
             break;
         case AST_SWITCH:
             // Changed label to "SWITCH" and shape to diamond (consistent with other control flow) [cite: 206, 309]
@@ -99,7 +100,7 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             fprintf(f, "  n%d [label=\"%s, %s\", shape=invtrapezium, color=blue];\n", my_id,
                 node->data.AST_FUNC.id && node->data.AST_FUNC.id->data.AST_ID.id ? node->data.AST_FUNC.id->data.AST_ID.id : "",
                 node->data.AST_FUNC.type ? node->data.AST_FUNC.type : "");            
-                ast_to_dot_rec(f, node->data.AST_FUNC.body, my_id, "body");
+                ast_to_dot_rec(f, node->data.AST_FUNC.body, my_id,NULL);
             break;
         default:
             fprintf(f, "  n%d [label=\"?\", shape=plaintext];\n", my_id);
@@ -122,34 +123,34 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             break;
         case AST_RETURN:
             if (node->data.AST_RETURN.expr != NULL) { // Only recurse if a value is returned [cite: 200, 300]
-                ast_to_dot_rec(f, node->data.AST_RETURN.expr, my_id, "expr");
+                ast_to_dot_rec(f, node->data.AST_RETURN.expr, my_id,NULL);
             }
             break;
         case AST_AFF:
-            ast_to_dot_rec(f, node->data.AST_AFF.op1, my_id, "lhs");
-            ast_to_dot_rec(f, node->data.AST_AFF.op2, my_id, "rhs");
+            ast_to_dot_rec(f, node->data.AST_AFF.op1, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_AFF.op2, my_id, NULL);
             break;
         case AST_BINOP:
-            ast_to_dot_rec(f, node->data.AST_BINOP.left, my_id, "left");
-            ast_to_dot_rec(f, node->data.AST_BINOP.right, my_id, "right");
+            ast_to_dot_rec(f, node->data.AST_BINOP.left, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_BINOP.right, my_id, NULL);
             break;
         case AST_MOINS:
-            ast_to_dot_rec(f, node->data.AST_MOINS.op, my_id, "op");
+            ast_to_dot_rec(f, node->data.AST_MOINS.op, my_id, NULL);
             break;
         case AST_FOR:
-            ast_to_dot_rec(f, node->data.AST_FOR.init, my_id, "init");
-            ast_to_dot_rec(f, node->data.AST_FOR.cond, my_id, "cond");
-            ast_to_dot_rec(f, node->data.AST_FOR.post, my_id, "post");
-            ast_to_dot_rec(f, node->data.AST_FOR.body, my_id, "body");
+            ast_to_dot_rec(f, node->data.AST_FOR.init, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_FOR.cond, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_FOR.post, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_FOR.body, my_id, NULL);
             break;
         case AST_WHILE:
-            ast_to_dot_rec(f, node->data.AST_WHILE.cond, my_id, "cond");
-            ast_to_dot_rec(f, node->data.AST_WHILE.body, my_id, "body");
+            ast_to_dot_rec(f, node->data.AST_WHILE.cond, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_WHILE.body, my_id, NULL);
             break;
         case AST_IF:
-            ast_to_dot_rec(f, node->data.AST_IF.cond, my_id, "cond");
-            ast_to_dot_rec(f, node->data.AST_IF.then_branch, my_id, "then");
-            ast_to_dot_rec(f, node->data.AST_IF.else_branch, my_id, "else"); // Optional, will be NULL if no else [cite: 205, 307]
+            ast_to_dot_rec(f, node->data.AST_IF.cond, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_IF.then_branch, my_id, NULL);
+            ast_to_dot_rec(f, node->data.AST_IF.else_branch, my_id, NULL); // Optional, will be NULL if no else [cite: 205, 307]
             break;
         case AST_BLOCK: {
             InstructEntry *entry = node->data.AST_BLOCK.instructs;
@@ -157,7 +158,7 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             while (entry) {
                 char label[16];
                 snprintf(label, sizeof(label), "stmt%d", idx++);
-                ast_to_dot_rec(f, entry->instruct, my_id, label);
+                ast_to_dot_rec(f, entry->instruct, my_id, NULL);
                 entry = entry->next;
             }
             break;
@@ -169,7 +170,7 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
                 printf("param : ");ast_print(p->param);
                 char label[16];
                 snprintf(label, sizeof(label), "arg%d", idx++);
-                ast_to_dot_rec(f, p->param, my_id, label);
+                ast_to_dot_rec(f, p->param, my_id, NULL);
                 p = p->next;
             }
             break;
@@ -181,33 +182,33 @@ void ast_to_dot_rec(FILE *f, AST *node, int parent_id, const char *edge_label) {
             while (dim) {
                 char label[16];
                 snprintf(label, sizeof(label), "idx%d", idx++); // Changed "dim" to "idx" for clarity
-                ast_to_dot_rec(f, dim->dim, my_id, label);
+                ast_to_dot_rec(f, dim->dim, my_id, NULL);
                 dim = dim->next;
             }
             break;
         }
         case AST_SWITCH: {
-            ast_to_dot_rec(f, node->data.AST_SWITCH.expr, my_id, "expr"); // First child is expression [cite: 207, 309]
+            ast_to_dot_rec(f, node->data.AST_SWITCH.expr, my_id, NULL); // First child is expression [cite: 207, 309]
             CaseEntry *c = node->data.AST_SWITCH.cases;
             int idx = 0;
             while (c) {
                 char label[16];
-                snprintf(label, sizeof(label), "case%d", idx++); // Subsequent children are cases [cite: 207, 309]
+                snprintf(label, sizeof(label), "", idx++); // Subsequent children are cases [cite: 207, 309]
                 int case_id = get_next_dot_id();
                 // Cases themselves could be represented as nodes, or their value and body as children of the switch
                 // The current implementation creates a "case" node, which is acceptable if not explicitly forbidden
                 fprintf(f, "  n%d [label=\"case\", shape=box];\n", case_id);
                 fprintf(f, "  n%d -> n%d [label=\"%s\"];\n", my_id, case_id, label);
-                ast_to_dot_rec(f, c->value, case_id, "value");
-                ast_to_dot_rec(f, c->body, case_id, "body");
+                ast_to_dot_rec(f, c->value, case_id, NULL);
+                ast_to_dot_rec(f, c->body, case_id, NULL);
                 c = c->next;
             }
             if (node->data.AST_SWITCH.default_case) {
                 int def_id = get_next_dot_id();
                 // Last child is default case [cite: 208, 310]
                 fprintf(f, "  n%d [label=\"default\", shape=box];\n", def_id);
-                fprintf(f, "  n%d -> n%d [label=\"default\"];\n", my_id, def_id);
-                ast_to_dot_rec(f, node->data.AST_SWITCH.default_case, def_id, "body");
+                fprintf(f, "  n%d -> n%d [label=\"\"];\n", my_id, def_id);
+                ast_to_dot_rec(f, node->data.AST_SWITCH.default_case, def_id, NULL);
             }
             break;
         }

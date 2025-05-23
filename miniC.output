@@ -10,8 +10,8 @@ Grammaire
     4 declaration_fonction: /* vide */
     5                     | declaration_fonction EXTERN type IDENTIFICATEUR LPAREN liste_parms RPAREN SEMICOLON
 
-    6 liste_fonctions: liste_fonctions fonction
-    7                | fonction
+    6 liste_fonctions: fonction
+    7                | liste_fonctions fonction
 
     8 declaration: type liste_declarateurs SEMICOLON
 
@@ -50,7 +50,7 @@ Grammaire
    30 instruction: $@3 bloc
 
    31 iteration: FOR LPAREN affectation SEMICOLON condition SEMICOLON affectation RPAREN instruction
-   32          | WHILE LPAREN condition RPAREN instruction
+   32          | WHILE LPAREN condition RPAREN bloc
 
    33 selection: IF LPAREN condition RPAREN instruction
    34          | IF LPAREN condition RPAREN instruction ELSE instruction
@@ -175,7 +175,7 @@ liste_declarations (48)
 declaration_fonction (49)
     à gauche: 4 5, à droite: 3 5
 liste_fonctions (50)
-    à gauche: 6 7, à droite: 1 6
+    à gauche: 6 7, à droite: 1 7
 declaration (51)
     à gauche: 8, à droite: 2
 liste_declarateurs (52)
@@ -197,7 +197,7 @@ parm (59)
 liste_instructions (60)
     à gauche: 22 23, à droite: 22 45
 instruction (61)
-    à gauche: 24 25 26 27 28 30, à droite: 22 31 32 33 34 38 40
+    à gauche: 24 25 26 27 28 30, à droite: 22 31 33 34 38 40
 $@3 (62)
     à gauche: 29, à droite: 30
 iteration (63)
@@ -215,7 +215,7 @@ appel (68)
 saut (69)
     à gauche: 42 43 44, à droite: 26
 bloc (70)
-    à gauche: 45, à droite: 15 30
+    à gauche: 45, à droite: 15 30 32
 affectation (71)
     à gauche: 46, à droite: 28 31
 variable (72)
@@ -303,7 +303,7 @@ binary_comp (79)
 état 7
 
     1 programme: liste_declarations liste_fonctions .
-    6 liste_fonctions: liste_fonctions . fonction
+    7 liste_fonctions: liste_fonctions . fonction
 
     VOID  décalage et aller à l'état 5
     INT   décalage et aller à l'état 6
@@ -323,9 +323,9 @@ binary_comp (79)
 
 état 9
 
-    7 liste_fonctions: fonction .
+    6 liste_fonctions: fonction .
 
-    $défaut  réduction par utilisation de la règle 7 (liste_fonctions)
+    $défaut  réduction par utilisation de la règle 6 (liste_fonctions)
 
 
 état 10
@@ -351,9 +351,9 @@ binary_comp (79)
 
 état 12
 
-    6 liste_fonctions: liste_fonctions fonction .
+    7 liste_fonctions: liste_fonctions fonction .
 
-    $défaut  réduction par utilisation de la règle 6 (liste_fonctions)
+    $défaut  réduction par utilisation de la règle 7 (liste_fonctions)
 
 
 état 13
@@ -655,7 +655,7 @@ binary_comp (79)
 
 état 46
 
-   32 iteration: WHILE . LPAREN condition RPAREN instruction
+   32 iteration: WHILE . LPAREN condition RPAREN bloc
 
     LPAREN  décalage et aller à l'état 64
 
@@ -833,7 +833,7 @@ binary_comp (79)
 
 état 64
 
-   32 iteration: WHILE LPAREN . condition RPAREN instruction
+   32 iteration: WHILE LPAREN . condition RPAREN bloc
 
     IDENTIFICATEUR  décalage et aller à l'état 68
     CONSTANTE       décalage et aller à l'état 69
@@ -1110,7 +1110,7 @@ binary_comp (79)
 
 état 88
 
-   32 iteration: WHILE LPAREN condition . RPAREN instruction
+   32 iteration: WHILE LPAREN condition . RPAREN bloc
    60 condition: condition . binary_rel condition
 
     LAND    décalage et aller à l'état 119
@@ -1480,27 +1480,11 @@ binary_comp (79)
 
 état 121
 
-   32 iteration: WHILE LPAREN condition RPAREN . instruction
+   32 iteration: WHILE LPAREN condition RPAREN . bloc
 
-    IDENTIFICATEUR  décalage et aller à l'état 44
-    FOR             décalage et aller à l'état 45
-    WHILE           décalage et aller à l'état 46
-    IF              décalage et aller à l'état 47
-    SWITCH          décalage et aller à l'état 48
-    BREAK           décalage et aller à l'état 49
-    RETURN          décalage et aller à l'état 50
+    LBRACE  décalage et aller à l'état 39
 
-    $défaut  réduction par utilisation de la règle 29 ($@3)
-
-    instruction  aller à l'état 135
-    $@3          aller à l'état 54
-    iteration    aller à l'état 55
-    selection    aller à l'état 56
-    appel        aller à l'état 57
-    saut         aller à l'état 58
-    affectation  aller à l'état 59
-    variable     aller à l'état 60
-    var          aller à l'état 61
+    bloc  aller à l'état 135
 
 
 état 122
@@ -1663,7 +1647,7 @@ binary_comp (79)
 
 état 135
 
-   32 iteration: WHILE LPAREN condition RPAREN instruction .
+   32 iteration: WHILE LPAREN condition RPAREN bloc .
 
     $défaut  réduction par utilisation de la règle 32 (iteration)
 

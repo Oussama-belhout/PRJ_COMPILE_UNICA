@@ -102,7 +102,10 @@ typedef union YYSTYPE
 		int ival;
 		char *sval;
 	}ast_container;
-
+    struct {
+        struct CaseEntry *cases;
+        struct AST *default_case;
+    } switch_block_info;
 
     int integer;
     char *str;
@@ -120,7 +123,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 124 "miniC.tab.h"
+#line 127 "miniC.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -4,7 +4,7 @@ just got the aff
 aff (i = 450)
 we got to const : 123 
 just got the aff 	
-aff (j = Unknown)
+aff (j = (-123))
 we got to const : 1 
 just created new_binop
 (i + 1)
@@ -20,10 +20,8 @@ just created new_binop
 reducing the bin op (<) propagated to experession
 -- reducing instruction list one-by-one , inst number : 0
 reducing now bloc
-Created AST_BLOCK with instructs: 00B42B58
-this bloc has 1 instructions`- Block -- 0
-   `- VLPT [id: printd, type: FUNC_CALL]
-exiting now scope 1
+Created AST_BLOCK with instructs: 00BE18E0
+this bloc has 1 instructionsexiting now scope 1
 exiting now scope 2
 we got to const : 1 
 just created new_binop
@@ -477,432 +475,856 @@ we got to const : 0
 -- reducing instruction list one-by-one , inst number : 58
 -- reducing instruction list one-by-one , inst number : 59
 reducing now bloc
-Created AST_BLOCK with instructs: 00A21CC0
-this bloc has 60 instructions`- Block -- 0
-   |- Assign
-   |  |- Id: i
-   |  `- Number: 450
-   |- Assign
-   |  |- Id: j
-   |  `- Unknown
-   |- If
-   |  |- BinOp [<]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- Block -- 0
-   |  |  `- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- Number: 45
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- Number: 45
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- Number: 45
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- Id: i
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- Id: i
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<]
-   |  |  |- Id: i
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- Number: 45
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- Number: 45
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- Number: 45
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- Id: i
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- Id: i
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>]
-   |  |  |- Id: i
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- Number: 45
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- Number: 45
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- Number: 45
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- Id: i
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- Id: i
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [>=]
-   |  |  |- Id: i
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- Number: 45
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- Number: 45
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- Number: 45
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- Id: i
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- Id: i
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [<=]
-   |  |  |- Id: i
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- Number: 45
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- Number: 45
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- Number: 45
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- Id: i
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- Id: i
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [==]
-   |  |  |- Id: i
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- BinOp [+]
-   |  |  |  |- Id: i
-   |  |  |  `- Number: 1
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- Number: 45
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- Number: 45
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- Number: 45
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- Id: i
-   |  |  `- BinOp [+]
-   |  |     |- Id: j
-   |  |     `- Number: 0
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- Id: i
-   |  |  `- Number: 123
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   |- If
-   |  |- BinOp [!=]
-   |  |  |- Id: i
-   |  |  `- Id: j
-   |  |- VLPT [id: printd, type: FUNC_CALL]
-   |  `- VLPT [id: printd, type: FUNC_CALL]
-   `- Unknown
-exiting now scope 1
+Created AST_BLOCK with instructs: 00A02810
+this bloc has 60 instructionsexiting now scope 1
 exiting now scope 2
 reduced-exited function-scope main ---------
-now printing the whole tree 
+ getting to node Unknown getting to node {
+  aff (i = 450)
+
+  aff (j = (-123))
+
+  if (((i + 1)
+ < (j + 0)
+)
+) {
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+}
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ < 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ < j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 < 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 < j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i < 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i < j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ > (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ > 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ > j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 > (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 > 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 > j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i > (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i > 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i > j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ >= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ >= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ >= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 >= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 >= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 >= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i >= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i >= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i >= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ <= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ <= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ <= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 <= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 <= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 <= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i <= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i <= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i <= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ == (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ == 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ == j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 == (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 == 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 == j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i == (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i == 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i == j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ != (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ != 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if (((i + 1)
+ != j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 != (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 != 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((45 != j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i != (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i != 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  if ((i != j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+
+  return 0;
+}
+ getting to node aff (i = 450)
+ getting to node i getting to node 450 getting to node aff (j = (-123))
+ getting to node j getting to node (-123) getting to node 123 getting to node if (((i + 1)
+ < (j + 0)
+)
+) {
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+}
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ < (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node {
+  VLPT(id: printd, type: FUNC_CALL, params: )
+
+}
+ getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ < (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node if (((i + 1)
+ < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ < (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ < 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ < 123)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ < j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ < j)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 < (j + 0)
+)
+ getting to node 45 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 < 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 < 123)
+ getting to node 45 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 < j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 < j)
+ getting to node 45 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i < (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i < (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i < 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i < 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i < j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i < j)
+ getting to node i getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ > (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ > (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ > 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ > 123)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ > j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ > j)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 > (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 > (j + 0)
+)
+ getting to node 45 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 > 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 > 123)
+ getting to node 45 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 > j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 > j)
+ getting to node 45 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i > (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i > (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i > 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i > 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i > j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i > j)
+ getting to node i getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ >= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ >= (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ >= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ >= 123)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ >= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ >= j)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 >= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 >= (j + 0)
+)
+ getting to node 45 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 >= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 >= 123)
+ getting to node 45 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 >= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 >= j)
+ getting to node 45 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i >= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i >= (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i >= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i >= 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i >= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i >= j)
+ getting to node i getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ <= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ <= (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ <= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ <= 123)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ <= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ <= j)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 <= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 <= (j + 0)
+)
+ getting to node 45 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 <= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 <= 123)
+ getting to node 45 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 <= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 <= j)
+ getting to node 45 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i <= (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i <= (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i <= 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i <= 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i <= j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i <= j)
+ getting to node i getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ == (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ == (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ == 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ == 123)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ == j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ == j)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 == (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 == (j + 0)
+)
+ getting to node 45 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 == 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 == 123)
+ getting to node 45 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 == j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 == j)
+ getting to node 45 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i == (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i == (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i == 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i == 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i == j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i == j)
+ getting to node i getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ != (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ != (j + 0)
+)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ != 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ != 123)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if (((i + 1)
+ != j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node ((i + 1)
+ != j)
+ getting to node (i + 1)
+ getting to node i getting to node 1 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 != (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 != (j + 0)
+)
+ getting to node 45 getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 != 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 != 123)
+ getting to node 45 getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((45 != j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (45 != j)
+ getting to node 45 getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i != (j + 0)
+)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i != (j + 0)
+)
+ getting to node i getting to node (j + 0)
+ getting to node j getting to node 0 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i != 123)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i != 123)
+ getting to node i getting to node 123 getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node if ((i != j)
+) VLPT(id: printd, type: FUNC_CALL, params: )
+ else VLPT(id: printd, type: FUNC_CALL, params: )
+
+ getting to node (i != j)
+ getting to node i getting to node j getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : i getting to node i getting to node VLPT(id: printd, type: FUNC_CALL, params: )
+param : j getting to node j getting to node return 0; getting to node 0
